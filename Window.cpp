@@ -29,7 +29,7 @@ Window::init()
         return false;
 
     SDL_WM_SetCaption(m_caption.c_str(), NULL);
-    SDL_ShowCursor(0);
+    SDL_ShowCursor(1);
 
     return true;
 }
