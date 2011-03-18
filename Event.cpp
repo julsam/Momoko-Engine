@@ -26,6 +26,11 @@ Event::update()
 void Event::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 {
     std::cout << (char)sym << "\n";
+    switch (sym)
+    {
+        case SDLK_ESCAPE:
+            m_exit = true;
+    }
 }
 
 void
