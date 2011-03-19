@@ -4,6 +4,7 @@
 #include "Config.h"
 #include "Window.h"
 #include "Event.h"
+#include "Graphics.h"
 
 class Engine
 {
@@ -14,9 +15,10 @@ public:
     int execute();
 
 private:
-    Config m_config;
-    Window* m_window;
-    Event m_event;
+    Config mConfig;
+    Window* mWindow;
+    Event mEvent;
+    Graphics mGraphics;
     bool m_quit;
 };
 

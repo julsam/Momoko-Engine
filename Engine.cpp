@@ -3,7 +3,7 @@
 using namespace std;
 
 Engine::Engine(int argc, char **argv)
-    : m_config(argc, argv), m_quit(false)
+    : mConfig(argc, argv), m_quit(false)
 {
 }
 
@@ -14,12 +14,13 @@ Engine::~Engine()
 bool
 Engine::init()
 {
-    m_window = new Window(m_config.getCaption(),
-                          m_config.getScreenWidth(),
-                          m_config.getScreenHeight(),
-                          m_config.isFullscreen());
-    m_window->init();
-    m_event.init();
+    mWindow = new Window(mConfig.getCaption(),
+                          mConfig.getScreenWidth(),
+                          mConfig.getScreenHeight(),
+                          mConfig.isFullscreen());
+    mWindow->init();
+    mEvent.init();
+    mGraphics.init();
 
     return true;
 }
@@ -27,15 +28,18 @@ Engine::init()
 int
 Engine::execute()
 {
-    while(!m_event.isExitPressed() && !m_quit)
+    while(!mEvent.isExitPressed() && !m_quit)
     {
         SDL_Delay(33);
 
-        m_event.update();
+        mEvent.update();
 
-        if(m_event.isKeyPressed(SDLK_ESCAPE))
+        if(mEvent.isKeyPressed(SDLK_ESCAPE))
             m_quit = true;
 
+        mGraphics.beginFrame();
+        //cout << mWindow->getScreenSize().x << endl;
+        mGraphics.endFrame();
     }
     return 0;
 }

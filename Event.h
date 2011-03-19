@@ -23,12 +23,14 @@ public:
     void OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode);
     void OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode);
     void OnMouseMove(int mX, int mY, int relX, int relY, bool Left, bool Right, bool Middle);
+    // TODO: replace all this ugly methods by only one method
     void OnLButtonDown(int mX, int mY);
     void OnLButtonUp(int mX, int mY);
     void OnRButtonDown(int mX, int mY);
     void OnRButtonUp(int mX, int mY);
     void OnMButtonDown(int mX, int mY);
     void OnMButtonUp(int mX, int mY);
+    void OnResize(int _w, int _h);
     void OnExit();
     bool isExitPressed();
     bool isKeyPressed(int _keysym);

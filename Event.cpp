@@ -95,6 +95,11 @@ Event::OnMButtonUp(int mX, int mY)
     m_buttonStates[2] = STATE_UP;
 }
 
+void
+Event::OnResize(int _w, int _h)
+{
+}
+
 // window close call
 void
 Event::OnExit()
