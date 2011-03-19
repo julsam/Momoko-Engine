@@ -6,6 +6,7 @@ SRC = main.cpp\
 	  Window.cpp\
 	  Event.cpp\
 	  Input.cpp\
+	  Vector2.cpp\
 
 OBJECTS = $(SRC:.cpp=.o)
 
