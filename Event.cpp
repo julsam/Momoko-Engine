@@ -42,48 +42,56 @@ Event::OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode)
 void
 Event::OnMouseMove(int mX, int mY, int relX, int relY, bool Left, bool Right, bool Middle)
 {
-    cout << mX << " ";
-    cout << mY << " ";
-    cout << relX << " ";
-    cout << relY << " ";
-    cout << Left << " ";
-    cout << Right << " ";
-    cout << Middle << "\n";
+    m_mousePosition = Vector2(mX, mY);
+    cout << m_mousePosition.x << " " << m_mousePosition.y << endl;
+
+    if(Left && m_buttonStates[0] == STATE_UP)
+        m_buttonStates[0] = STATE_DOWN;
+    if(Right && m_buttonStates[1] == STATE_UP)
+        m_buttonStates[0] = STATE_DOWN;
+    if(Middle && m_buttonStates[2] == STATE_UP)
+        m_buttonStates[0] = STATE_DOWN;
 }
 
 void
 Event::OnLButtonDown(int mX, int mY)
 {
+    m_mousePosition = Vector2(mX, mY);
     m_buttonStates[0] = STATE_DOWN;
 }
 
 void
 Event::OnLButtonUp(int mX, int mY)
 {
+    m_mousePosition = Vector2(mX, mY);
     m_buttonStates[0] = STATE_UP;
 }
 
 void
 Event::OnRButtonDown(int mX, int mY)
 {
+    m_mousePosition = Vector2(mX, mY);
     m_buttonStates[1] = STATE_DOWN;
 }
 
 void
 Event::OnRButtonUp(int mX, int mY)
 {
+    m_mousePosition = Vector2(mX, mY);
     m_buttonStates[1] = STATE_UP;
 }
 
 void
 Event::OnMButtonDown(int mX, int mY)
 {
+    m_mousePosition = Vector2(mX, mY);
     m_buttonStates[2] = STATE_DOWN;
 }
 
 void
 Event::OnMButtonUp(int mX, int mY)
 {
+    m_mousePosition = Vector2(mX, mY);
     m_buttonStates[2] = STATE_UP;
 }
 
@@ -108,4 +116,20 @@ Event::isKeyPressed(int _keysym)
     else
         return false;
 }
+
+Vector2 
+Event::getMousePosition() const
+{
+    return m_mousePosition;
+}
+
+bool
+Event::isMouseButtonPressed(MouseButton _button) const
+{
+    if(m_buttonStates[_button] == STATE_DOWN)
+        return true;
+    else
+        return false;
+}
+
 

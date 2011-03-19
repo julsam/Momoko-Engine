@@ -1,8 +1,10 @@
 #ifndef _EVENT_H
 #define _EVENT_H
 
-#include "Input.h"
 #include <iostream>
+
+#include "Vector2.h"
+#include "Input.h"
 
 class Event : public Input
 {
@@ -30,12 +32,15 @@ public:
     void OnExit();
     bool isExitPressed();
     bool isKeyPressed(int _keysym);
+    Vector2 getMousePosition() const;
+    bool isMouseButtonPressed(MouseButton _button) const;
 
 private:
     bool m_exit;
     SDL_Event m_event;
     int m_keyStates[SDLK_LAST];
-    int m_buttonStates[3]; // 0 : left, 1 : right, 2 : middle
+    int m_buttonStates[MOUSE_BUTTON_MAX]; // 0 : left, 1 : right, 2 : middle
+    Vector2 m_mousePosition;
 };
 
 #endif // _EVENT_H

@@ -20,3 +20,11 @@ Vector2::operator[](int i)
     else
         return y;
 }
+
+Vector2
+Vector2::operator=(const Vector2 &_vector2)
+{
+    x = _vector2.x;
+    y = _vector2.y;
+    return *this;
+}

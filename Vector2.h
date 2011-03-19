@@ -8,6 +8,7 @@ public:
     Vector2(int _x, int _y);
 
     float operator[](int i);
+    Vector2 operator=(const Vector2 &_vector2);
 
 public:
     float x, y;

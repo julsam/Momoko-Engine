@@ -3,8 +3,19 @@
 
 #include <SDL.h>
 
+enum MouseButton
+{
+    MOUSE_BUTTON_LEFT = 0,
+    MOUSE_BUTTON_RIGHT = 1,
+    MOUSE_BUTTON_MIDDLE = 2,
+    MOUSE_BUTTON_MAX = 3    // give size
+};
+
 class Input
 {
+public:
+
+
 public:
     Input();
     virtual ~Input();
