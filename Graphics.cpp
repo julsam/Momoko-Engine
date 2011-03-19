@@ -1,15 +1,17 @@
 #include "Graphics.h"
 #include "Window.h"
 
+Graphics* Graphics::instance = NULL;
+
 Graphics::Graphics()
 {
+    instance = this;
 }
 
 void
 Graphics::init()
 {
-    //TODO: resize
-    Vector2 screenSize = Vector2(640, 480);
+    Vector2 screenSize = Window::getScreenSizeInfo();
 
     glClearColor(0.23f, 0.23f, 0.23f, 0.0f);
     glClearDepth(1.0f);
@@ -31,9 +33,7 @@ Graphics::init()
 void
 Graphics::beginFrame()
 {
-    //TODO: resize
-    Vector2 screenSize = Vector2(640, 480);
-    //std::cout << screenSize.x << std::endl;
+    Vector2 screenSize = Window::getScreenSizeInfo();
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

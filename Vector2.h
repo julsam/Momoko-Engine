@@ -5,6 +5,7 @@ class Vector2
 {
 public:
     Vector2();
+    Vector2(float _x, float _y);
     Vector2(int _x, int _y);
 
     float operator[](int i);

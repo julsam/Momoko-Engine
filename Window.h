@@ -14,9 +14,17 @@ public:
     Window(std::string _caption, int _w, int _h, bool _fullscreen);
     ~Window();
     bool init();
+    static bool reshape(const int _w, const int _h);
     static void swapBuffers();
+    static void setScreenSizeInfo(int _w, int _h);
+    static Vector2 getScreenSizeInfo();
 
 private:
+    bool setupVideoMode();
+
+private:
+    static Window *instance;
+
     SDL_Surface* m_surface;
     std::string m_caption;
     Vector2 m_resolution;

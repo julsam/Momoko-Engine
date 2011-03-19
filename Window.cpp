@@ -2,6 +2,8 @@
 
 using namespace std;
 
+Window* Window::instance = NULL;
+
 Window::Window(string _caption, int _w=640, int _h=480, 
         bool _fullscreen=false)
     : m_surface(NULL),
@@ -9,7 +11,7 @@ Window::Window(string _caption, int _w=640, int _h=480,
       m_resolution(_w, _h),
       m_fullscreen(_fullscreen)
 {
-
+    instance = this;
 }
 
 Window::~Window()
@@ -42,29 +44,59 @@ Window::init()
     SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,8);
 
-    /**
+    if(!setupVideoMode())
+        return false;
+
+    SDL_ShowCursor(1);
+    
+    return true;
+}
+
+bool
+Window::setupVideoMode()
+{
+/**
      * Usefull tags to remember :
      * SDL_HWSURFACE | SDL_SWSURFACE | SDL_RESIZABLE | SDL_NOFRAME
      * | SDL_FULLSCREEN | SDL_DOUBLEBUF | SDL_GL_DOUBLEBUFFER | SDL_OPENGL
      */
     int flags = SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER | SDL_RESIZABLE
-        | SDL_OPENGL | ( m_fullscreen ? SDL_FULLSCREEN : 0 );
+        | SDL_OPENGL | ( instance->m_fullscreen ? SDL_FULLSCREEN : 0 );
 
-    if((m_surface = SDL_SetVideoMode(m_resolution.x, m_resolution.y, 32, flags)) == NULL)
+    if((instance->m_surface = SDL_SetVideoMode(instance->m_resolution.x, 
+                    instance->m_resolution.y, 32, flags)) == NULL)
     {
         cout << "Couldn't set up video mode" << endl;
         return false;
     }
 
-    SDL_WM_SetCaption(m_caption.c_str(), NULL);
-    SDL_ShowCursor(1);
+    SDL_WM_SetCaption(instance->m_caption.c_str(), NULL);
 
     return true;
+}
+
+bool
+Window::reshape(const int _w, const int _h)
+{
+    instance->m_resolution = Vector2(_w, _h);
+    return instance->setupVideoMode();
 }
 
 void
 Window::swapBuffers()
 {
     SDL_GL_SwapBuffers();
+}
+
+void
+Window::setScreenSizeInfo(int _w, int _h)
+{
+    instance->m_resolution = Vector2(_w, _h);
+}
+
+Vector2
+Window::getScreenSizeInfo()
+{
+    return instance->m_resolution;
 }
 

@@ -5,8 +5,11 @@
 
 using namespace std;
 
+Config* Config::instance = NULL;
+
 Config::Config(int argc, char **argv)
 {
+    instance = this;
     m_argc = argc;
     m_argv = argv;
     setOptions();
@@ -15,14 +18,14 @@ Config::Config(int argc, char **argv)
 void
 Config::setOptions(void)
 {
-    m_progname      = m_argv[0];
-    m_fullscreen    = false;
-    m_screenWidth   = 640;
-    m_screenHeight  = 480;
+    instance->m_progname      = m_argv[0];
+    instance->m_fullscreen    = false;
+    instance->m_screenWidth   = 640;
+    instance->m_screenHeight  = 480;
 
     int c;
-    m_verbose_flag = 0;
-    m_version_flag = 0;
+    instance->m_verbose_flag = 0;
+    instance->m_version_flag = 0;
 
     while (1) {
         int option_index = 0;
@@ -50,25 +53,26 @@ Config::setOptions(void)
                 break;
 
            case 'f':
-                m_fullscreen   = true;
-                m_screenWidth  = 1680;
-                m_screenHeight = 1050;
+                instance->m_fullscreen   = true;
+                instance->m_screenWidth  = 1680;
+                instance->m_screenHeight = 1050;
                 break;
 
            case 's':
                 try {
-                    parseScreenSize(optarg, m_screenWidth, m_screenHeight);
+                    parseScreenSize(optarg, instance->m_screenWidth, 
+                            instance->m_screenHeight);
                 } catch (const string &err) {
                     cerr << err << endl;
                 }
                 break;
 
            case 'v':
-                m_verbose_flag = 1;
+                instance->m_verbose_flag = 1;
                 break;
 
            case 'V':
-                m_version_flag = 1;
+                instance->m_version_flag = 1;
                 break;
 
            case '?':
@@ -81,27 +85,28 @@ Config::setOptions(void)
         }
     }
 
-    if(m_version_flag)
+    if(instance->m_version_flag)
         showVersion();
 
-    if(m_verbose_flag)
+    if(instance->m_verbose_flag)
     {
-        if(m_fullscreen)
+        if(instance->m_fullscreen)
             cout << "Set fullscreen" << endl;
         else
             cout << "Set windowed mode" << endl;
-        cout << "Screen size = " << m_screenWidth << "x" << m_screenHeight << endl;
+        cout << "Screen size = " << instance->m_screenWidth << "x" 
+            << instance->m_screenHeight << endl;
     }
 }
 
 void
 Config::showUsage(void)
 {
-    cout << "Usage: " + m_progname + " [ options ... ]\n"
+    cout << "Usage: " << instance->m_progname << " [ options ... ]\n"
             "\t-h, --help\t\t\tShow this page\n"
             "\t-f, --fullscreen\t\tSet fullscreen\n"
             "\t-s SIZE, --size=SIZE\t\tSet window size. "
-            "Example : " + m_progname + " --size=1024x768\n"
+            "Example : " << instance->m_progname << " --size=1024x768\n"
             "\t-v, --verbose\t\t\tSet verbose mode\n"
             "\t-V, --version\t\t\tShow program version\n"
             ;
@@ -111,7 +116,7 @@ Config::showUsage(void)
 void
 Config::showVersion(void)
 {
-    cout << m_progname + " " << _VERSION << endl;
+    cout << instance->m_progname + " " << _VERSION << endl;
     exit(1);
 }
 
@@ -119,25 +124,25 @@ Config::showVersion(void)
 int
 Config::getScreenWidth(void) const
 {
-    return m_screenWidth;
+    return instance->m_screenWidth;
 }
 
 int
 Config::getScreenHeight(void) const
 {
-    return m_screenHeight;
+    return instance->m_screenHeight;
 }
 
 std::string 
 Config::getCaption(void)
 {
-    return m_progname;
+    return instance->m_progname;
 }
 
 bool
 Config::isFullscreen(void) const
 {
-    return m_fullscreen;
+    return instance->m_fullscreen;
 }
 
 void

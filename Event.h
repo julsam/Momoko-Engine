@@ -5,6 +5,7 @@
 
 #include "Vector2.h"
 #include "Input.h"
+#include "Window.h"
 
 class Event : public Input
 {
@@ -20,6 +21,13 @@ public:
     ~Event();
     bool init();
     void update();
+
+    static bool isExitPressed();
+    static bool isKeyPressed(int _keysym);
+    static Vector2 getMousePosition();
+    static bool isMouseButtonPressed(MouseButton _button);
+
+private:
     void OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode);
     void OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode);
     void OnMouseMove(int mX, int mY, int relX, int relY, bool Left, bool Right, bool Middle);
@@ -32,12 +40,10 @@ public:
     void OnMButtonUp(int mX, int mY);
     void OnResize(int _w, int _h);
     void OnExit();
-    bool isExitPressed();
-    bool isKeyPressed(int _keysym);
-    Vector2 getMousePosition() const;
-    bool isMouseButtonPressed(MouseButton _button) const;
 
 private:
+    static Event* instance;
+
     bool m_exit;
     SDL_Event m_event;
     int m_keyStates[SDLK_LAST];

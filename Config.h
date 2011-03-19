@@ -24,6 +24,8 @@ private:
     void parseScreenSize(const char* _raw_size, int &_w, int &_h);
 
 private:
+    static Config* instance;
+
     bool        m_fullscreen;
     int         m_screenWidth;
     int         m_screenHeight;

@@ -4,6 +4,7 @@
 #include <GL/gl.h>
 
 #include "Vector2.h"
+#include "Window.h"
 
 class Graphics
 {
@@ -14,6 +15,7 @@ public:
     void endFrame();
 
 private:
+    static Graphics* instance;
 
 };
 

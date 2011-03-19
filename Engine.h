@@ -15,6 +15,7 @@ public:
     int execute();
 
 private:
+    static Engine* instance;
     Config mConfig;
     Window* mWindow;
     Event mEvent;

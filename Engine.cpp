@@ -2,9 +2,12 @@
 
 using namespace std;
 
+Engine* Engine::instance = NULL;
+
 Engine::Engine(int argc, char **argv)
     : mConfig(argc, argv), m_quit(false)
 {
+    instance = this;
 }
 
 Engine::~Engine()
@@ -15,9 +18,9 @@ bool
 Engine::init()
 {
     mWindow = new Window(mConfig.getCaption(),
-                          mConfig.getScreenWidth(),
-                          mConfig.getScreenHeight(),
-                          mConfig.isFullscreen());
+                         mConfig.getScreenWidth(),
+                         mConfig.getScreenHeight(),
+                         mConfig.isFullscreen());
     mWindow->init();
     mEvent.init();
     mGraphics.init();
@@ -34,11 +37,10 @@ Engine::execute()
 
         mEvent.update();
 
-        if(mEvent.isKeyPressed(SDLK_ESCAPE))
+        if(Event::isKeyPressed(SDLK_ESCAPE))
             m_quit = true;
 
         mGraphics.beginFrame();
-        //cout << mWindow->getScreenSize().x << endl;
         mGraphics.endFrame();
     }
     return 0;
