@@ -8,6 +8,8 @@ SRC = main.cpp\
 	  Input.cpp\
 	  Vector2.cpp\
 	  Graphics.cpp\
+	  LogManager.cpp\
+	  Utils.cpp\
 
 OBJECTS = $(SRC:.cpp=.o)
 

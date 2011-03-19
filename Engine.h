@@ -5,6 +5,7 @@
 #include "Window.h"
 #include "Event.h"
 #include "Graphics.h"
+#include "LogManager.h"
 
 class Engine
 {
@@ -16,6 +17,7 @@ public:
 
 private:
     static Engine* instance;
+    LogManager mLogManager;
     Config mConfig;
     Window* mWindow;
     Event mEvent;

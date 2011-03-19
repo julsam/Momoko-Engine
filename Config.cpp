@@ -165,3 +165,10 @@ Config::parseScreenSize(const char* _raw_size, int &_w, int &_h)
     _h = atoi(raw_size.substr(i+1, raw_size.size()-1).c_str());
 }
 
+
+
+bool 
+Config::isVerboseEnabled()
+{
+    return (instance->m_verbose_flag ? true : false);
+}

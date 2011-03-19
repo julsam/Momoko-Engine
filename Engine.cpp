@@ -17,6 +17,8 @@ Engine::~Engine()
 bool
 Engine::init()
 {
+    mLogManager.init();
+
     mWindow = new Window(mConfig.getCaption(),
                          mConfig.getScreenWidth(),
                          mConfig.getScreenHeight(),

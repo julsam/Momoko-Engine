@@ -19,6 +19,7 @@ public:
     int getScreenHeight(void) const;
     std::string getCaption(void);
     bool isFullscreen(void) const;
+    static bool isVerboseEnabled();
 
 private:
     void parseScreenSize(const char* _raw_size, int &_w, int &_h);
