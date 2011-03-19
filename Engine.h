@@ -17,6 +17,7 @@ private:
     Config m_config;
     Window* m_window;
     Event m_event;
+    bool m_quit;
 };
 
 #endif // _ENGINE_H

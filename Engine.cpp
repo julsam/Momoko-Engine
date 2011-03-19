@@ -3,7 +3,7 @@
 using namespace std;
 
 Engine::Engine(int argc, char **argv)
-    : m_config(argc, argv)
+    : m_config(argc, argv), m_quit(false)
 {
 }
 
@@ -27,11 +27,16 @@ Engine::init()
 int
 Engine::execute()
 {
-    while(!m_event.isExitPressed())
+    while(!m_event.isExitPressed() && !m_quit)
     {
-        m_event.update();
-    }
+        SDL_Delay(33);
 
+        m_event.update();
+
+        if(m_event.isKeyPressed(SDLK_ESCAPE))
+            m_quit = true;
+
+    }
     return 0;
 }
 
