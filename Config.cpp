@@ -95,7 +95,7 @@ Config::setOptions(void)
             LogManager::logMessage("Set windowed mode");
 
         LogManager::logMessage("Screen size = " 
-                +  Utils::vec2str(instance->m_screenSize));
+                +  to_str<Vector2>(instance->m_screenSize));
     }
 }
 

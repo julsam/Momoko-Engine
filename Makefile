@@ -10,6 +10,7 @@ SRC = main.cpp\
 	  Graphics.cpp\
 	  LogManager.cpp\
 	  Utils.cpp\
+	  Tools.cpp\
 
 OBJECTS = $(SRC:.cpp=.o)
 

@@ -8,6 +8,7 @@
 
 #include "LogManager.h"
 #include "Vector2.h"
+#include "Tools.h"
 
 #define _VERSION "0.0.1"
 

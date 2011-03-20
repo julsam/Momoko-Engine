@@ -8,6 +8,7 @@
 #include "Vector2.h"
 #include "Config.h"
 #include "Utils.h"
+#include "Tools.h"
 
 class LogManager
 {
