@@ -31,9 +31,7 @@ Window::init()
         putenv("SDL_VIDEO_CENTERED=1");
      */
 
-    // \o/ note : (char*) cast make g++ stop complaining about
-    // `deprecated conversion from string constant to ‘char*’`
-    putenv((char*)"SDL_DEBUG=1"); // let's try this too
+    putenv((char*)"SDL_DEBUG=1");
 
     if(SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO) < 0)
     {

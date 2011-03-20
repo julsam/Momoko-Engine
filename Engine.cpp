@@ -23,20 +23,11 @@ Engine::init()
                          mConfig.getScreenSize().x,
                          mConfig.getScreenSize().y,
                          mConfig.isFullscreen());
-    mWindow->init();
+    if(!mWindow->init())
+        return false;
     mEvent.init();
     mGraphics.init();
-    
-    int a = 2;
-    long b = 4;
-    float c = 1.577f;
-    double d = 45;
-    Vector2 e(12, 54);
-    LogManager::logMessage(a);
-    LogManager::logMessage(b);
-    LogManager::logMessage(c);
-    LogManager::logMessage(d);
-    LogManager::logMessage(e);
+
     return true;
 }
 
