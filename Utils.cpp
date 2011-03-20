@@ -2,6 +2,7 @@
 
 using namespace std;
 
+
 /**
  * Clear a file content.
  * @param   _filename   Filename string.
@@ -43,4 +44,44 @@ Utils::writeEndFile(const string& _filename, const string& _content)
     f.close();
 
     return true;
+}
+
+string
+Utils::num2str(const int _num)
+{
+    stringstream ss;
+    ss << _num;
+    return ss.str();
+}
+
+string
+Utils::num2str(const long _num)
+{
+    stringstream ss;
+    ss << _num;
+    return ss.str();
+}
+
+string
+Utils::num2str(const float _num)
+{
+    stringstream ss;
+    ss << _num;
+    return ss.str();
+}
+
+string
+Utils::num2str(const double _num)
+{
+    stringstream ss;
+    ss << _num;
+    return ss.str();
+}
+
+string
+Utils::vec2str(const Vector2 _vec)
+{
+    stringstream ss;
+    ss << "(" << _vec.x << ", " << _vec.y << ")";
+    return ss.str();
 }

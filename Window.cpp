@@ -23,9 +23,21 @@ Window::~Window()
 bool
 Window::init()
 {
-    if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
+    /**
+    //TODO
+    if not first launch (there is a config file)
+        putenv("SDL_VIDEO_WINDOW_POS=10,10");
+    else
+        putenv("SDL_VIDEO_CENTERED=1");
+     */
+
+    // \o/ note : (char*) cast make g++ stop complaining about
+    // `deprecated conversion from string constant to ‘char*’`
+    putenv((char*)"SDL_DEBUG=1"); // let's try this too
+
+    if(SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO) < 0)
     {
-        cout << "Couldn't initialize SDL" << endl;
+        LogManager::logMessage("Couldn't initialize SDL");
         return false;
     }
 
@@ -66,7 +78,7 @@ Window::setupVideoMode()
     if((instance->m_surface = SDL_SetVideoMode(instance->m_resolution.x, 
                     instance->m_resolution.y, 32, flags)) == NULL)
     {
-        cout << "Couldn't set up video mode" << endl;
+        LogManager::logMessage("Couldn't set up video mode");
         return false;
     }
 

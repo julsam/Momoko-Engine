@@ -6,6 +6,7 @@
 #include "SDL.h"
 #include <GL/gl.h>
 
+#include "LogManager.h"
 #include "Vector2.h"
 
 class Window

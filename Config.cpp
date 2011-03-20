@@ -20,8 +20,8 @@ Config::setOptions(void)
 {
     instance->m_progname      = m_argv[0];
     instance->m_fullscreen    = false;
-    instance->m_screenWidth   = 640;
-    instance->m_screenHeight  = 480;
+    instance->m_screenSize.x  = 640;
+    instance->m_screenSize.y  = 480;
 
     int c;
     instance->m_verbose_flag = 0;
@@ -54,14 +54,13 @@ Config::setOptions(void)
 
            case 'f':
                 instance->m_fullscreen   = true;
-                instance->m_screenWidth  = 1680;
-                instance->m_screenHeight = 1050;
+                instance->m_screenSize.x = 1680; // TODO change this
+                instance->m_screenSize.y = 1050;
                 break;
 
            case 's':
                 try {
-                    parseScreenSize(optarg, instance->m_screenWidth, 
-                            instance->m_screenHeight);
+                    parseScreenSize(optarg, instance->m_screenSize);
                 } catch (const string &err) {
                     cerr << err << endl;
                 }
@@ -91,11 +90,12 @@ Config::setOptions(void)
     if(instance->m_verbose_flag)
     {
         if(instance->m_fullscreen)
-            cout << "Set fullscreen" << endl;
+            LogManager::logMessage("Set fullscreen");
         else
-            cout << "Set windowed mode" << endl;
-        cout << "Screen size = " << instance->m_screenWidth << "x" 
-            << instance->m_screenHeight << endl;
+            LogManager::logMessage("Set windowed mode");
+
+        LogManager::logMessage("Screen size = " 
+                +  Utils::vec2str(instance->m_screenSize));
     }
 }
 
@@ -121,16 +121,11 @@ Config::showVersion(void)
 }
 
 
-int
-Config::getScreenWidth(void) const
-{
-    return instance->m_screenWidth;
-}
 
-int
-Config::getScreenHeight(void) const
+Vector2
+Config::getScreenSize(void) const
 {
-    return instance->m_screenHeight;
+    return instance->m_screenSize;
 }
 
 std::string 
@@ -146,7 +141,7 @@ Config::isFullscreen(void) const
 }
 
 void
-Config::parseScreenSize(const char* _raw_size, int &_w, int &_h)
+Config::parseScreenSize(const char* _raw_size, Vector2& _screenSize)
 {
     string raw_size(_raw_size);
     unsigned int i = 0;
@@ -161,8 +156,8 @@ Config::parseScreenSize(const char* _raw_size, int &_w, int &_h)
         throw string("Outranged or uncorrect screen size. Set values to default.");
         return;
     }
-    _w = atoi(raw_size.substr(0, i).c_str());
-    _h = atoi(raw_size.substr(i+1, raw_size.size()-1).c_str());
+    _screenSize.x = atoi(raw_size.substr(0, i).c_str());
+    _screenSize.y = atoi(raw_size.substr(i+1, raw_size.size()-1).c_str());
 }
 
 

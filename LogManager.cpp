@@ -42,36 +42,35 @@ LogManager::logMessage(const char* _char)
 void
 LogManager::logMessage(const int _num)
 {
-    string msg = string((char*)_num);
+    string msg = Utils::num2str(_num);
     instance->writeToFile(msg);
 }
 
 void
 LogManager::logMessage(const long _num)
 {
-    string msg = string((char*)_num);
+    string msg = Utils::num2str(_num);
     instance->writeToFile(msg);
 }
 
 void
 LogManager::logMessage(const float _num)
 {
-    string msg = string((char*)int(_num));
+    string msg = Utils::num2str(_num);
     instance->writeToFile(msg);
 }
 
 void
 LogManager::logMessage(const double _num)
 {
-    string msg = string((char*)int(_num));
+    string msg = Utils::num2str(_num);
     instance->writeToFile(msg);
 }
 
 void
 LogManager::logMessage(const Vector2 _vec)
 {
-    string msg = string("(") + string((char*)int(_vec.x)) + string(", ") 
-        + string((char*)int(_vec.y)) + string(")");
+    string msg = Utils::vec2str(_vec);
     instance->writeToFile(msg);
 }
 
@@ -95,7 +94,7 @@ LogManager::writeToFile(const std::string& log)
     if(Config::isVerboseEnabled())
         instance->output(log);
 
-    // if no error write to the file
+    // if no error occured, write to the file
     if(!instance->m_fileError)
     {
         if(!Utils::writeEndFile(instance->m_filename, log))
