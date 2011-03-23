@@ -1,5 +1,6 @@
 #include "Graphics.h"
 #include "Window.h"
+#include "LogManager.h"
 
 Graphics* Graphics::instance = NULL;
 
@@ -11,6 +12,8 @@ Graphics::Graphics()
 void
 Graphics::init()
 {
+    LogManager::getSingleton()->logMessage("Init Graphics");
+
     Vector2 screenSize = Window::getScreenSizeInfo();
 
     glClearColor(0.23f, 0.23f, 0.23f, 0.0f);
@@ -28,6 +31,8 @@ Graphics::init()
     glEnable(GL_TEXTURE_2D);
 
     glLoadIdentity();
+
+    glEnable2D();
 }
 
 void
@@ -61,3 +66,32 @@ Graphics::endFrame()
     Window::swapBuffers();
 }
 
+
+void
+Graphics::glEnable2D()
+{
+    LogManager::getSingleton()->logMessage("glEnable2D");
+
+    GLint viewPort[4];
+    glGetIntegerv(GL_VIEWPORT, viewPort);
+
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix(); // maybe useless
+    glLoadIdentity();
+
+
+    glOrtho(0.0f, viewPort[2], viewPort[3], 0.0f, -1.0, 1.0);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
+}
+
+void
+Graphics::glDisable2D()
+{
+    LogManager::getSingleton()->logMessage("glDisable2D");
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+}

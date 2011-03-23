@@ -4,7 +4,6 @@
 #include <GL/gl.h>
 
 #include "Vector2.h"
-#include "Window.h"
 
 class Graphics
 {
@@ -13,6 +12,8 @@ public:
     void init();
     void beginFrame();
     void endFrame();
+    void glEnable2D();
+    void glDisable2D();
 
 private:
     static Graphics* instance;
