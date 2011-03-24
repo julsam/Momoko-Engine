@@ -2,6 +2,15 @@
 
 using namespace std;
 
+bool
+Utils::fileExists(const char* _filename)
+{
+    fstream f(_filename, ios::in);
+    if (f)
+        return true;
+    return false;
+}
+
 
 /**
  * Clear a file content.
@@ -20,6 +29,7 @@ Utils::clearFileContent(const string& _filename)
         f.close();
         // truncate the file in order to clear content
         f.open(_filename.c_str(), ios::out | ios::trunc);
+        f.close();
     }
 
     return(f ? true : false);

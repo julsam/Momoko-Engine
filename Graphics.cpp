@@ -19,12 +19,12 @@ Graphics::init()
     glClearColor(0.23f, 0.23f, 0.23f, 0.0f);
     glClearDepth(1.0f);
 
-    glViewport(0, 0, screenSize.x, screenSize.y);
+    glViewport(0.0f, 0.0f, screenSize.x, screenSize.y);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    glOrtho(0, screenSize.x, screenSize.y, 0, 1, -1);
+    glOrtho(0.0f, screenSize.x, screenSize.y, 0.0f, 1.0, -1.0);
 
     glMatrixMode(GL_MODELVIEW);
 
@@ -42,12 +42,12 @@ Graphics::beginFrame()
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glViewport(0, 0, screenSize.x, screenSize.y);
+    glViewport(0.0f, 0.0f, screenSize.x, screenSize.y);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    glOrtho(0, screenSize.x, screenSize.y, 0, 1, -1);
+    glOrtho(0.0f, screenSize.x, screenSize.y, 0.0f, 1.0, -1.0);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -79,7 +79,6 @@ Graphics::glEnable2D()
     glPushMatrix(); // maybe useless
     glLoadIdentity();
 
-
     glOrtho(0.0f, viewPort[2], viewPort[3], 0.0f, -1.0, 1.0);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
@@ -95,3 +94,4 @@ Graphics::glDisable2D()
     glMatrixMode(GL_MODELVIEW);
     glPopMatrix();
 }
+

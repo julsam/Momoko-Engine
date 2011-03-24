@@ -5,6 +5,21 @@
 #include <string.h>
 #include "Vector2.h"
 
+#define _VERSION "0.0.1"
+
+struct Config_Info
+{
+    bool        fullscreen;
+    Vector2     windowSize;
+    Vector2     windowPosition;     // only if not fullscreen and not windowCentered
+    bool        windowCentered;     // only if not fullscreen
+    bool        resizable;
+    
+    //KeySomething keybind;         // TODO
+    int         verbose;
+    std::string progname;
+};
+
 template <class T> std::string to_str(const T t)
 {
     std::stringstream ss;

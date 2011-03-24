@@ -1,4 +1,5 @@
 #include "Window.h"
+#include "Config.h"
 
 using namespace std;
 
@@ -28,8 +29,9 @@ Window::init()
     if not first launch (there is a config file)
         putenv("SDL_VIDEO_WINDOW_POS=10,10");
     else
-        putenv("SDL_VIDEO_CENTERED=1");
      */
+    if (Config::getInfo().windowCentered)
+        putenv((char*)"SDL_VIDEO_CENTERED=1");
 
     putenv((char*)"SDL_DEBUG=1");
 

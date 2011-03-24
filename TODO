@@ -1,8 +1,3 @@
 :::TODO:::
 
-* cfg file parser
-* config struct
-* maybe rename Config.h, to distinct arg options at launch 
-    / config file + game config
-* keybinding for cfg file. Let player change it
 * type of message in logMessage

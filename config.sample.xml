@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config formatVersion="0.0.1">
+    <video>
+        <fullscreen>false</fullscreen>
+        <windowWidth>1200</windowWidth>
+        <windowHeight>600</windowHeight>
+        <windowCentered>true</windowCentered>
+        <colorDepth>32</colorDepth>
+        <vSync>false</vSync>
+    </video>
+</config>

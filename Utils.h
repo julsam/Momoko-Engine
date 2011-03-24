@@ -11,6 +11,7 @@
 class Utils
 {
 public:
+    static bool fileExists(const char* _filename);
     static bool clearFileContent(const std::string& _filename);
     static bool writeEndFile(const std::string& _filename, const std::string& _content);
 };

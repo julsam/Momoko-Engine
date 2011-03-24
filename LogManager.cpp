@@ -1,4 +1,7 @@
 #include "LogManager.h"
+#include "Config.h"
+#include "Utils.h"
+#include "Tools.h"
 
 using namespace std;
 
@@ -94,9 +97,10 @@ LogManager::writeToFile(const std::string& log)
     if(Config::isVerboseEnabled())
         instance->output(log);
 
-    // if no error occured, write to the file
+    // if no error occured previously, write to the file
     if(!instance->m_fileError)
     {
+        // if couldn't write
         if(!Utils::writeEndFile(instance->m_filename, log))
         {
             instance->m_fileError = true;

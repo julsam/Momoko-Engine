@@ -12,12 +12,14 @@ Engine::Engine(int argc, char **argv)
 
 Engine::~Engine()
 {
+    delete mWindow;
 }
 
 bool
 Engine::init()
 {
-    mLogManager.init();
+    mLogManager.init(); // first thing to init
+    mConfig.init();
 
     mWindow = new Window(mConfig.getCaption(),
                          mConfig.getScreenSize().x,

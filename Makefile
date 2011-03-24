@@ -11,6 +11,8 @@ SRC = main.cpp\
 	  LogManager.cpp\
 	  Utils.cpp\
 	  Tools.cpp\
+	  ConfigFile.cpp\
+	  LaunchOpt.cpp\
 
 OBJECTS = $(SRC:.cpp=.o)
 

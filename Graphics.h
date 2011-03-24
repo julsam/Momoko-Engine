@@ -2,6 +2,7 @@
 #define _GRAPHICS_H
 
 #include <GL/gl.h>
+#include <GL/glu.h>
 
 #include "Vector2.h"
 
