@@ -37,7 +37,10 @@ Window::init()
      * the window goes to the center of the screen
      */
     if (Config::getInfo().windowCentered)
-        putenv((char*)"SDL_VIDEO_CENTERED=0");
+    {
+        putenv((char*)"SDL_VIDEO_CENTERED=1");
+        LogManager::getSingleton()->logMessage( "[Window] Init." );
+    }
 
     putenv((char*)"SDL_DEBUG=1");
 
@@ -97,6 +100,11 @@ Window::setupVideoMode()
 bool
 Window::reshape(const int _w, const int _h)
 {
+    // little tricks to disable centered mode
+    // when resized.
+    if (Config::getInfo().windowCentered)
+        putenv((char*)"SDL_VIDEO_CENTERED");
+
     LogManager::getSingleton()->logMessage("[Window] Resolution changed "+ to_str(_w) +"x"+ to_str(_h));
     instance->m_resolution = Vector2(_w, _h);
     return instance->setupVideoMode();
