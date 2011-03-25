@@ -16,10 +16,7 @@ public:
     bool init();
 
     static Config_Info getInfo();
-    static Vector2 getScreenSize();
     static std::string getCaption();
-    static bool isFullscreen();
-    static bool isVerboseEnabled();
 
 private:
 

@@ -16,9 +16,8 @@ public:
     ~Window();
     bool init();
     static bool reshape(const int _w, const int _h);
+    static Vector2 getWindowSize();
     static void swapBuffers();
-    static void setScreenSizeInfo(int _w, int _h);
-    static Vector2 getScreenSizeInfo();
 
 private:
     bool setupVideoMode();

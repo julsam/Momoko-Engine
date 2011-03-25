@@ -15,9 +15,10 @@ LaunchOpt::LaunchOpt(int argc, char** argv)
 void
 LaunchOpt::setOptions(Config_Info& _infos)
 {
-    m_progname     = m_argv[0];
+    m_progname      = m_argv[0];
+    _infos.progname = m_argv[0];
     int c;
-    m_version_flag = 0;
+    m_version_flag  = 0;
 
     LogManager::getSingleton()->logMessage( "[LaunchOpt] Setting up command line options." );
 

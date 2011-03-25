@@ -12,9 +12,9 @@ Graphics::Graphics()
 void
 Graphics::init()
 {
-    LogManager::getSingleton()->logMessage("Init Graphics");
+    LogManager::getSingleton()->logMessage("[Graphics] Init");
 
-    Vector2 screenSize = Window::getScreenSizeInfo();
+    Vector2 screenSize = Window::getWindowSize();
 
     glClearColor(0.23f, 0.23f, 0.23f, 0.0f);
     glClearDepth(1.0f);
@@ -38,7 +38,7 @@ Graphics::init()
 void
 Graphics::beginFrame()
 {
-    Vector2 screenSize = Window::getScreenSizeInfo();
+    Vector2 screenSize = Window::getWindowSize();
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -70,7 +70,7 @@ Graphics::endFrame()
 void
 Graphics::glEnable2D()
 {
-    LogManager::getSingleton()->logMessage("glEnable2D");
+    LogManager::getSingleton()->logMessage("[Graphics] glEnable2D");
 
     GLint viewPort[4];
     glGetIntegerv(GL_VIEWPORT, viewPort);
@@ -88,7 +88,7 @@ Graphics::glEnable2D()
 void
 Graphics::glDisable2D()
 {
-    LogManager::getSingleton()->logMessage("glDisable2D");
+    LogManager::getSingleton()->logMessage("[Graphics] glDisable2D");
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
     glMatrixMode(GL_MODELVIEW);

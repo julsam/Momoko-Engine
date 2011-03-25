@@ -24,6 +24,7 @@ Window::~Window()
 bool
 Window::init()
 {
+    LogManager::getSingleton()->logMessage( "[Window] Init." );
     /**
     //TODO
     if not first launch (there is a config file)
@@ -56,6 +57,7 @@ Window::init()
     SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,8);
 
+    LogManager::getSingleton()->logMessage( "[Window] Setup video mode." );
     if(!setupVideoMode())
         return false;
 
@@ -67,7 +69,7 @@ Window::init()
 bool
 Window::setupVideoMode()
 {
-/**
+    /**
      * Usefull tags to remember :
      * SDL_HWSURFACE | SDL_SWSURFACE | SDL_RESIZABLE | SDL_NOFRAME
      * | SDL_FULLSCREEN | SDL_DOUBLEBUF | SDL_GL_DOUBLEBUFFER | SDL_OPENGL
@@ -90,25 +92,21 @@ Window::setupVideoMode()
 bool
 Window::reshape(const int _w, const int _h)
 {
+    LogManager::getSingleton()->logMessage("[Window] Resolution changed "+ to_str(_w) +"x"+ to_str(_h));
     instance->m_resolution = Vector2(_w, _h);
     return instance->setupVideoMode();
+}
+
+
+Vector2
+Window::getWindowSize()
+{
+    return instance->m_resolution;
 }
 
 void
 Window::swapBuffers()
 {
     SDL_GL_SwapBuffers();
-}
-
-void
-Window::setScreenSizeInfo(int _w, int _h)
-{
-    instance->m_resolution = Vector2(_w, _h);
-}
-
-Vector2
-Window::getScreenSizeInfo()
-{
-    return instance->m_resolution;
 }
 

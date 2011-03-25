@@ -94,7 +94,7 @@ void
 LogManager::writeToFile(const std::string& log)
 {
     // display if in verbose mode
-    if(Config::isVerboseEnabled())
+    if(Config::getInfo().verbose)
         instance->output(log);
 
     // if no error occured previously, write to the file

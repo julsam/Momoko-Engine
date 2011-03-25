@@ -1,4 +1,5 @@
 #include "Event.h"
+#include "LogManager.h"
 
 using namespace std;
 
@@ -7,9 +8,6 @@ Event* Event::instance = NULL;
 Event::Event() : m_exit(false)
 {
     instance = this;
-
-    for(int i = 0; i < SDLK_LAST; i++)
-        m_keyStates[i] = STATE_UP;
 }
 
 Event::~Event()
@@ -19,6 +17,10 @@ Event::~Event()
 bool
 Event::init()
 {
+    LogManager::getSingleton()->logMessage("[Event] Init");
+
+    for(int i = 0; i < SDLK_LAST; i++)
+        instance->m_keyStates[i] = STATE_UP;
     return true;
 }
 
@@ -47,7 +49,6 @@ void
 Event::OnMouseMove(int mX, int mY, int relX, int relY, bool Left, bool Right, bool Middle)
 {
     m_mousePosition = Vector2(mX, mY);
-    cout << m_mousePosition.x << " " << m_mousePosition.y << endl;
 
     if(Left && instance->m_buttonStates[0] == STATE_UP)
         instance->m_buttonStates[0] = STATE_DOWN;
@@ -102,7 +103,7 @@ Event::OnMButtonUp(int mX, int mY)
 void
 Event::OnResize(int _w, int _h)
 {
-    cout << "Screen size changed : " << _w << " " << _h << endl;
+    LogManager::getSingleton()->logMessage("[Event] Resize signal sent.");
     Window::reshape(_w, _h);
 }
 

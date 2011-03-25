@@ -21,10 +21,11 @@ Engine::init()
     mLogManager.init(); // first thing to init
     mConfig.init();
 
-    mWindow = new Window(mConfig.getCaption(),
-                         mConfig.getScreenSize().x,
-                         mConfig.getScreenSize().y,
-                         mConfig.isFullscreen());
+    mWindow = new Window(Config::getCaption(),
+                         Config::getInfo().windowSize.x,
+                         Config::getInfo().windowSize.y,
+                         Config::getInfo().fullscreen);
+
     if(!mWindow->init())
         return false;
     mEvent.init();

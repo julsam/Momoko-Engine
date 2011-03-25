@@ -1,3 +1,4 @@
 :::TODO:::
 
 * type of message in logMessage
+* write windowPos to config file when shuting down the app

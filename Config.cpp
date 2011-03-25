@@ -26,28 +26,10 @@ Config::getInfo()
     return instance->m_infos;
 }
 
-
-Vector2
-Config::getScreenSize()
-{
-    return instance->m_infos.windowSize;
-}
-
 std::string 
 Config::getCaption()
 {
-    return instance->m_progname;
-}
-
-bool
-Config::isFullscreen()
-{
-    return instance->m_infos.fullscreen ? true:false;
+    return instance->m_infos.progname;
 }
 
 
-bool 
-Config::isVerboseEnabled()
-{
-    return (instance->m_infos.verbose ? true : false);
-}
