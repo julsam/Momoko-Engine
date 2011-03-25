@@ -2,6 +2,7 @@
 #include "LogManager.h"
 #include "Utils.h"
 #include "Vector2.h"
+#include "Config.h"
 
 #include <vector>
 #include <fstream>
@@ -20,7 +21,7 @@ ConfigFile::ConfigFile(const string& _filename)
 }
 
 bool
-ConfigFile::load()
+ConfigFile::loadFileOptions()
 {
     LogManager::getSingleton()->logMessage( "[ConfigFile] Loading file"+ m_filename);
 
@@ -35,7 +36,7 @@ ConfigFile::load()
 }
 
 bool
-ConfigFile::load(const string& _filename)
+ConfigFile::loadFileOptions(const string& _filename)
 {
     LogManager::getSingleton()->logMessage( "[ConfigFile] Loading file"+ _filename );
 
@@ -105,6 +106,11 @@ ConfigFile::processConfig(rapidxml::xml_node<>* XMLRoot)
     pElement = XMLRoot->first_node("video");
     if(pElement)
         processVideo(pElement);
+
+    // Video
+    pElement = XMLRoot->first_node("misc");
+    if(pElement)
+        processMisc(pElement);
 }
 
 void
@@ -123,28 +129,69 @@ ConfigFile::processVideo(rapidxml::xml_node<>* XMLNode)
         // fullscreen
         if (name == "fullscreen")
         {
-            m_infos.fullscreen = (value == "true" ? true:false);
+            Config::getSingleton()->m_infos.fullscreen = (value == "true" ? true:false);
         }
         // windowWidth
         else if (name == "windowWidth")
         {
-            m_infos.windowSize.x = atoi(value.c_str());
+            Config::getSingleton()->m_infos.windowSize.x = atoi(value.c_str());
         }
         // windowHeight
         else if (name == "windowHeight")
         {
-            m_infos.windowSize.y = atoi(value.c_str());
+            Config::getSingleton()->m_infos.windowSize.y = atoi(value.c_str());
         }
         // windowCentered
         else if (name == "windowCentered")
         {
-            m_infos.windowCentered = (value == "true" ? true:false);
+            Config::getSingleton()->m_infos.windowCentered = (value == "true" ? true:false);
+        }
+        // windowResizable
+        else if (name == "windowResizable")
+        {
+            Config::getSingleton()->m_infos.windowResizable = (value == "true" ? true:false);
+        }
+        // colorDepth
+        else if (name == "colorDepth")
+        {
+            Config::getSingleton()->m_infos.colorDepth = atoi(value.c_str());
+        }
+        // vSync
+        else if (name == "vSync")
+        {
+            Config::getSingleton()->m_infos.vSync = (value == "true" ? true:false);
         }
 
         pElement = pElement->next_sibling();
     }
     LogManager::getSingleton()->logMessage( "[ConfigFile] Done with video options." );
 }
+
+
+void
+ConfigFile::processMisc(rapidxml::xml_node<>* XMLNode)
+{
+    LogManager::getSingleton()->logMessage( "[ConfigFile] Processing misc. options." );
+
+    rapidxml::xml_node<>* pElement;
+    pElement = XMLNode->first_node();
+
+    while(pElement != 0)
+    {
+        string name(pElement->name());
+        string value(pElement->value());
+
+        // verbose
+        if (name == "verbose")
+        {
+            Config::getSingleton()->m_infos.verbose = (value == "true" ? true:false);
+        }
+
+        pElement = pElement->next_sibling();
+    }
+    LogManager::getSingleton()->logMessage( "[ConfigFile] Done with misc. options." );
+}
+
 
 string
 ConfigFile::getAttrib(rapidxml::xml_node<>* XMLNode, const string &attrib, const string &defaultValue)

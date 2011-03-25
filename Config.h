@@ -7,19 +7,24 @@
 #include <iostream>
 #include <string.h>
 
-class Config: public ConfigFile, public LaunchOpt
+class Config
 {
 public:
     Config(int argc, char **argv);
+    static Config* getSingleton();
     bool init();
+    void setupDefaultValues();
 
     static Config_Info getInfo();
     static std::string getCaption();
 
-private:
+public:
+    Config_Info m_infos;
 
 private:
     static Config* instance;
+    ConfigFile mConfigFile;
+    LaunchOpt mLaunchOpt;
 };
 
 #endif // _CONFIG_H

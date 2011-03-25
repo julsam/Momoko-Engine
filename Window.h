@@ -28,8 +28,9 @@ private:
 
     SDL_Surface* m_surface;
     std::string m_caption;
-    Vector2 m_resolution;
+    Vector2 m_windowSize;
     bool m_fullscreen;
+    Vector2 m_sysResolution;
 };
 
 #endif // _WINDOW_H

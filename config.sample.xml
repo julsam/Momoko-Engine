@@ -5,7 +5,11 @@
         <windowWidth>1200</windowWidth>
         <windowHeight>600</windowHeight>
         <windowCentered>true</windowCentered>
+        <windowResizable>true</windowResizable>
         <colorDepth>32</colorDepth>
         <vSync>false</vSync>
     </video>
+    <misc>
+        <verbose>true</verbose>
+    </misc>
 </config>

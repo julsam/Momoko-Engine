@@ -10,7 +10,7 @@ Window::Window(string _caption, int _w=640, int _h=480,
         bool _fullscreen=false)
     : m_surface(NULL),
       m_caption(_caption),
-      m_resolution(_w, _h),
+      m_windowSize(_w, _h),
       m_fullscreen(_fullscreen)
 {
     instance = this;
@@ -39,7 +39,7 @@ Window::init()
     if (Config::getInfo().windowCentered)
     {
         putenv((char*)"SDL_VIDEO_CENTERED=1");
-        LogManager::getSingleton()->logMessage( "[Window] Init." );
+        LogManager::getSingleton()->logMessage( "[Window] Set window centered" );
     }
 
     putenv((char*)"SDL_DEBUG=1");
@@ -50,8 +50,11 @@ Window::init()
         return false;
     }
 
-    // I honestly have no idea what all 
-    // this attribute are for....
+    // get screen resolution
+    const SDL_VideoInfo* _i = SDL_GetVideoInfo();
+    if ( _i->current_w && _i->current_h )
+        m_sysResolution = Vector2(_i->current_w, _i->current_h);
+
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE,        8);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,      8);
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE,       8);
@@ -70,7 +73,7 @@ Window::init()
         return false;
 
     SDL_ShowCursor(1);
-    
+
     return true;
 }
 
@@ -79,14 +82,17 @@ Window::setupVideoMode()
 {
     /**
      * Usefull tags to remember :
-     * SDL_HWSURFACE | SDL_SWSURFACE | SDL_RESIZABLE | SDL_NOFRAME
+     * SDL_HWSURFACE | SDL_SWSURFACE | SDL_RESIZABLE | SDL_NOFRAME | ASYNCBLIT
      * | SDL_FULLSCREEN | SDL_DOUBLEBUF | SDL_GL_DOUBLEBUFFER | SDL_OPENGL
      */
-    int flags = SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER | SDL_RESIZABLE
+    int flags = SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER
+        | ( Config::getInfo().windowResizable ? SDL_RESIZABLE : 0 )
         | SDL_OPENGL | ( instance->m_fullscreen ? SDL_FULLSCREEN : 0 );
 
-    if((instance->m_surface = SDL_SetVideoMode(instance->m_resolution.x, 
-                    instance->m_resolution.y, 32, flags)) == NULL)
+    int bpp = Config::getInfo().colorDepth;
+
+    if ((instance->m_surface = SDL_SetVideoMode(instance->m_windowSize.x, 
+                    instance->m_windowSize.y, bpp, flags)) == NULL)
     {
         LogManager::logMessage("Couldn't set up video mode");
         return false;
@@ -97,6 +103,10 @@ Window::setupVideoMode()
     return true;
 }
 
+/*
+ * /!\ In Windows, setting the video mode
+ *     resets the current OpenGL context
+ */
 bool
 Window::reshape(const int _w, const int _h)
 {
@@ -105,8 +115,8 @@ Window::reshape(const int _w, const int _h)
     if (Config::getInfo().windowCentered)
         putenv((char*)"SDL_VIDEO_CENTERED");
 
-    LogManager::getSingleton()->logMessage("[Window] Resolution changed "+ to_str(_w) +"x"+ to_str(_h));
-    instance->m_resolution = Vector2(_w, _h);
+    LogManager::getSingleton()->logMessage("[Window] Window size changed "+ to_str(_w) +"x"+ to_str(_h));
+    instance->m_windowSize = Vector2(_w, _h);
     return instance->setupVideoMode();
 }
 
@@ -114,7 +124,7 @@ Window::reshape(const int _w, const int _h)
 Vector2
 Window::getWindowSize()
 {
-    return instance->m_resolution;
+    return instance->m_windowSize;
 }
 
 void
@@ -127,7 +137,7 @@ void
 Window::changeFullscreen()
 {
     instance->m_fullscreen = !instance->m_fullscreen;
-    reshape(1680, 1050);
+    reshape(instance->m_sysResolution.x, instance->m_sysResolution.y);
 }
 
 void

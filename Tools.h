@@ -13,7 +13,9 @@ struct Config_Info
     Vector2     windowSize;
     Vector2     windowPosition;     // only if not fullscreen and not windowCentered
     bool        windowCentered;     // only if not fullscreen
-    bool        resizable;
+    bool        windowResizable;
+    int         colorDepth;
+    bool        vSync;
     
     //KeySomething keybind;         // TODO
     int         verbose;
