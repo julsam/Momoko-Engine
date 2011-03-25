@@ -22,7 +22,11 @@ private:
     Window* mWindow;
     Event mEvent;
     Graphics mGraphics;
+
     bool m_quit;
+    double deltaTime;
+    long thisTime;
+    long lastTime;
 };
 
 #endif // _ENGINE_H

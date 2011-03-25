@@ -1,6 +1,7 @@
 #include "ConfigFile.h"
 #include "LogManager.h"
 #include "Utils.h"
+#include "Vector2.h"
 
 #include <vector>
 #include <fstream>

@@ -3,7 +3,6 @@
 
 #include <string>
 #include "rapidxml/rapidxml.hpp"
-#include "Vector2.h"
 #include "Tools.h"
 
 

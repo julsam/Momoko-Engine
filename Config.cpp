@@ -1,4 +1,6 @@
 #include "Config.h"
+#include "LogManager.h"
+#include "Vector2.h"
 
 using namespace std;
 

@@ -1,4 +1,5 @@
 #include "Window.h"
+#include "LogManager.h"
 #include "Config.h"
 
 using namespace std;
@@ -31,8 +32,12 @@ Window::init()
         putenv("SDL_VIDEO_WINDOW_POS=10,10");
     else
      */
+
+    /* /!\ undesired behavior: when resized,
+     * the window goes to the center of the screen
+     */
     if (Config::getInfo().windowCentered)
-        putenv((char*)"SDL_VIDEO_CENTERED=1");
+        putenv((char*)"SDL_VIDEO_CENTERED=0");
 
     putenv((char*)"SDL_DEBUG=1");
 
@@ -108,5 +113,19 @@ void
 Window::swapBuffers()
 {
     SDL_GL_SwapBuffers();
+}
+
+void
+Window::changeFullscreen()
+{
+    instance->m_fullscreen = !instance->m_fullscreen;
+    reshape(1680, 1050);
+}
+
+void
+Window::setCaption(const string& title)
+{
+    instance->m_caption = title;
+    SDL_WM_SetCaption(instance->m_caption.c_str(), NULL);
 }
 

@@ -1,8 +1,6 @@
 #ifndef _CONFIG_H
 #define _CONFIG_H
 
-#include "LogManager.h"
-#include "Vector2.h"
 #include "ConfigFile.h"
 #include "LaunchOpt.h"
 

@@ -2,11 +2,10 @@
 #define _WINDOW_H
 
 #include <iostream>
-#include <string.h>
+#include <string>
 #include "SDL.h"
 #include <GL/gl.h>
 
-#include "LogManager.h"
 #include "Vector2.h"
 
 class Window
@@ -18,6 +17,8 @@ public:
     static bool reshape(const int _w, const int _h);
     static Vector2 getWindowSize();
     static void swapBuffers();
+    static void changeFullscreen();
+    static void setCaption(const std::string& title);
 
 private:
     bool setupVideoMode();
