@@ -29,60 +29,61 @@ LogManager::getSingleton()
 }
 
 void
-LogManager::logMessage(const bool _bool)
+LogManager::logMessage(const bool _bool, const LogMessageLevel lml)
 {
     string msg = string(_bool ? "true" : "false");
     instance->writeToFile(msg);
 }
 
 void
-LogManager::logMessage(const char* _char)
+LogManager::logMessage(const char* _char, const LogMessageLevel lml)
 {
     string msg = string(_char);
     instance->writeToFile(msg);
 }
 
 void
-LogManager::logMessage(const int _num)
+LogManager::logMessage(const int _num, const LogMessageLevel lml)
 {
     string msg = to_str(_num);
     instance->writeToFile(msg);
 }
 
 void
-LogManager::logMessage(const long _num)
+LogManager::logMessage(const long _num, const LogMessageLevel lml)
 {
     string msg = to_str(_num);
     instance->writeToFile(msg);
 }
 
 void
-LogManager::logMessage(const float _num)
+LogManager::logMessage(const float _num, const LogMessageLevel lml)
 {
     string msg = to_str(_num);
     instance->writeToFile(msg);
 }
 
 void
-LogManager::logMessage(const double _num)
+LogManager::logMessage(const double _num, const LogMessageLevel lml)
 {
     string msg = to_str(_num);
     instance->writeToFile(msg);
 }
 
 void
-LogManager::logMessage(const Vector2 _vec)
+LogManager::logMessage(const Vector2 _vec, const LogMessageLevel lml)
 {
     string msg = to_str<Vector2>(_vec);
     instance->writeToFile(msg);
 }
 
 void
-LogManager::logMessage(const std::string& _msg)
+LogManager::logMessage(const std::string& _msg, const LogMessageLevel lml)
 {
     string msg = string(_msg);
     instance->writeToFile(msg);
 }
+
 
 void
 LogManager::output(const std::string& log)

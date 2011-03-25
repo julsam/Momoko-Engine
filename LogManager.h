@@ -11,27 +11,27 @@
 class LogManager
 {
 public:
-    enum
+    enum LogMessageLevel
     {
-        INFO = 0,
-        ERROR,
-        DEBUG
+        LML_TRIVIAL = 1,
+        LML_NORMAL = 2,
+        LML_CRITICAL = 3
     };
 
 public:
     LogManager();
     void init();
     static LogManager* getSingleton();
+    static void setTimeStampEnabled(bool b);
 
-    // TODO: add type of message
-    static void logMessage(const bool _bool);
-    static void logMessage(const char* _char);
-    static void logMessage(const int _num);
-    static void logMessage(const long _num);
-    static void logMessage(const float _num);
-    static void logMessage(const double _num);
-    static void logMessage(const Vector2 _vec);
-    static void logMessage(const std::string& _msg); 
+    static void logMessage(const bool _bool, const LogMessageLevel lml=LML_NORMAL);
+    static void logMessage(const char* _char, const LogMessageLevel lml=LML_NORMAL);
+    static void logMessage(const int _num, const LogMessageLevel lml=LML_NORMAL);
+    static void logMessage(const long _num, const LogMessageLevel lml=LML_NORMAL);
+    static void logMessage(const float _num, const LogMessageLevel lml=LML_NORMAL);
+    static void logMessage(const double _num, const LogMessageLevel lml=LML_NORMAL);
+    static void logMessage(const Vector2 _vec, const LogMessageLevel lml=LML_NORMAL);
+    static void logMessage(const std::string& _msg, const LogMessageLevel lml=LML_NORMAL);
 
 private:
     void output(const std::string& log);
