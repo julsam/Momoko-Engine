@@ -9,6 +9,15 @@
 class Graphics
 {
 public:
+    struct Image
+    {
+        char *m_filename;
+        const int m_width;
+        const int m_height;
+        GLuint m_texID;
+    };
+
+public:
     Graphics();
     void init();
     void beginFrame();

@@ -11,6 +11,7 @@ SRC = main.cpp\
 	  LogManager.cpp\
 	  Utils.cpp\
 	  Tools.cpp\
+	  AbstractXml.cpp\
 	  ConfigFile.cpp\
 	  LaunchOpt.cpp\
 

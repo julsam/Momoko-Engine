@@ -2,6 +2,8 @@
 #include "Window.h"
 #include "LogManager.h"
 
+#include <IL/ilut.h>
+
 Graphics* Graphics::instance = NULL;
 
 Graphics::Graphics()
@@ -13,6 +15,13 @@ void
 Graphics::init()
 {
     LogManager::getSingleton()->logMessage("[Graphics] Init");
+
+    // Initialise DevIL.
+    LogManager::getSingleton()->logMessage("[Graphics] Initialise DevIL");
+    ilInit();
+    iluInit();
+    ilutInit();
+    //ilutRenderer( ILUT_OPENGL );
 
     Vector2 screenSize = Window::getWindowSize();
 

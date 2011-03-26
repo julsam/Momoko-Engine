@@ -29,7 +29,7 @@ template <class T> std::string to_str(const T t)
     return ss.str();
 }
 
-template <> std::string to_str<Vector2>(const Vector2 t);
+template<> std::string to_str<Vector2>(const Vector2 t);
 
 #endif // _TOOLS_H
 

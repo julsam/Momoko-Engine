@@ -24,7 +24,7 @@ Config::init()
     LogManager::getSingleton()->logMessage( "[Config] Init" );
 
     setupDefaultValues();
-    mConfigFile.loadFileOptions();
+    mConfigFile.loadConfig();
     mLaunchOpt.setOptions(instance->m_infos);
     return true;
 }

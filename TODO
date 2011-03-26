@@ -2,3 +2,4 @@
 
 * write windowPos to config file when shuting down the app
 * write ConfigFile::createDefaultFile
+* handling exceptions

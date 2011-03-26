@@ -11,6 +11,11 @@
 class LogManager
 {
 public:
+    enum LogMessageType // useless for now
+    {
+        LMT_INFO = 1,
+        LMT_ERROR = 3
+    };
     enum LogMessageLevel
     {
         LML_TRIVIAL = 1,
