@@ -21,6 +21,8 @@ public:
 protected:
     void parse(const std::string& _input_xml);
     std::string getAttrib(rapidxml::xml_node<>* XMLNode, const std::string &attrib, const std::string &defaultValue);
+    int XMLInt(rapidxml::xml_node<>* XMLNode, const std::string& node_name);
+    bool XMLBool(rapidxml::xml_node<>* XMLNode, const std::string& node_name);
 
 protected:
     std::string m_filename;

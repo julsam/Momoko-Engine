@@ -53,52 +53,14 @@ ConfigFile::processVideo(rapidxml::xml_node<>* XMLNode)
 {
     LogManager::getSingleton()->logMessage( "[ConfigFile] Processing Video options." );
 
-    rapidxml::xml_node<>* pElement;
-    pElement = XMLNode->first_node();
+    Config::getSingleton()->m_infos.fullscreen = XMLBool(XMLNode, "fullscreen");
+    Config::getSingleton()->m_infos.windowSize.x = XMLInt(XMLNode, "windowWidth");
+    Config::getSingleton()->m_infos.windowSize.y = XMLInt(XMLNode, "windowHeight");
+    Config::getSingleton()->m_infos.windowCentered = XMLBool(XMLNode, "windowCentered");
+    Config::getSingleton()->m_infos.windowResizable = XMLBool(XMLNode, "windowResizable");
+    Config::getSingleton()->m_infos.colorDepth = XMLInt(XMLNode, "colorDepth");
+    Config::getSingleton()->m_infos.vSync = XMLBool(XMLNode, "vSync");
 
-    while(pElement != 0)
-    {
-        string name(pElement->name());
-        string value(pElement->value());
-
-        // fullscreen
-        if (name == "fullscreen")
-        {
-            Config::getSingleton()->m_infos.fullscreen = (value == "true" ? true:false);
-        }
-        // windowWidth
-        else if (name == "windowWidth")
-        {
-            Config::getSingleton()->m_infos.windowSize.x = atoi(value.c_str());
-        }
-        // windowHeight
-        else if (name == "windowHeight")
-        {
-            Config::getSingleton()->m_infos.windowSize.y = atoi(value.c_str());
-        }
-        // windowCentered
-        else if (name == "windowCentered")
-        {
-            Config::getSingleton()->m_infos.windowCentered = (value == "true" ? true:false);
-        }
-        // windowResizable
-        else if (name == "windowResizable")
-        {
-            Config::getSingleton()->m_infos.windowResizable = (value == "true" ? true:false);
-        }
-        // colorDepth
-        else if (name == "colorDepth")
-        {
-            Config::getSingleton()->m_infos.colorDepth = atoi(value.c_str());
-        }
-        // vSync
-        else if (name == "vSync")
-        {
-            Config::getSingleton()->m_infos.vSync = (value == "true" ? true:false);
-        }
-
-        pElement = pElement->next_sibling();
-    }
     LogManager::getSingleton()->logMessage( "[ConfigFile] Done with video options." );
 }
 
@@ -108,22 +70,8 @@ ConfigFile::processMisc(rapidxml::xml_node<>* XMLNode)
 {
     LogManager::getSingleton()->logMessage( "[ConfigFile] Processing misc. options." );
 
-    rapidxml::xml_node<>* pElement;
-    pElement = XMLNode->first_node();
+    Config::getSingleton()->m_infos.vSync = XMLBool(XMLNode, "verbose");
 
-    while(pElement != 0)
-    {
-        string name(pElement->name());
-        string value(pElement->value());
-
-        // verbose
-        if (name == "verbose")
-        {
-            Config::getSingleton()->m_infos.verbose = (value == "true" ? true:false);
-        }
-
-        pElement = pElement->next_sibling();
-    }
     LogManager::getSingleton()->logMessage( "[ConfigFile] Done with misc. options." );
 }
 

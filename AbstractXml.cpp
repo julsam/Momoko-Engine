@@ -99,3 +99,45 @@ AbstractXml::getAttrib(rapidxml::xml_node<>* XMLNode, const string &attrib, cons
         return defaultValue;
 }
 
+int
+AbstractXml::XMLInt(rapidxml::xml_node<>* XMLNode, const string& node_name)
+{
+    rapidxml::xml_node<>* elem;
+    elem = XMLNode->first_node(node_name.c_str());
+
+    if (elem == NULL)
+    {
+        LogManager::getSingleton()->logMessage("Error: Unable to find node with name "+ node_name, LogManager::LML_NORMAL);
+        return 0;
+    }
+
+    string value(elem->value());
+    if (value != "")
+        return atoi(value.c_str());
+
+    string name(elem->name());
+    LogManager::getSingleton()->logMessage("Error: Empty value for "+ name, LogManager::LML_CRITICAL);
+    return 0;
+}
+
+bool
+AbstractXml::XMLBool(rapidxml::xml_node<>* XMLNode, const string& node_name)
+{
+    rapidxml::xml_node<>* elem;
+    elem = XMLNode->first_node(node_name.c_str());
+
+    if (elem == NULL)
+    {
+        LogManager::getSingleton()->logMessage("Error: Unable to find node with name "+ node_name, LogManager::LML_NORMAL);
+        return false;
+    }
+
+    string value(elem->value());
+    if (value != "")
+        return (value == "true"? true:false);
+
+    string name(elem->name());
+    LogManager::getSingleton()->logMessage("Error: Empty value for "+ name, LogManager::LML_CRITICAL);
+    return false;
+}
+
