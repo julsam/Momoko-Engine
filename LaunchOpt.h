@@ -9,7 +9,7 @@ class LaunchOpt
 {
 public:
     LaunchOpt(int argc, char** argv);
-    void setOptions(Config_Info& _infos);
+    void setOptions(Config_Info* _infos);
     void showUsage(void);
     void showVersion(void);
 

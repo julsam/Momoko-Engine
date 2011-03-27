@@ -2,12 +2,14 @@
 #define _CONFIGFILE_H
 
 #include "AbstractXml.h"
+#include "Tools.h"
 
 class ConfigFile : public AbstractXml
 {
 public:
-    ConfigFile();
-    ConfigFile(const std::string& _filename);
+    ConfigFile(Config_Info *_infos);
+    ConfigFile(const std::string& _filename, Config_Info *_infos);
+    ~ConfigFile();
     void loadConfig(const std::string& _filename="");
     bool createDefaultFile(); //TODO
 
@@ -17,6 +19,7 @@ private:
     void processMisc(rapidxml::xml_node<>* XMLNode);
 
 private:
+    Config_Info*  m_pinfos; // pointer to Config::m_infos
 };
 
 #endif // _CONFIGFILE_H

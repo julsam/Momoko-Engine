@@ -7,15 +7,20 @@
 
 using namespace std;
 
-ConfigFile::ConfigFile()
+ConfigFile::ConfigFile(Config_Info* _infos)
     : AbstractXml()
 {
+    m_pinfos = _infos;
 }
 
-ConfigFile::ConfigFile(const string& _filename)
+ConfigFile::ConfigFile(const string& _filename, Config_Info* _infos)
     : AbstractXml(_filename)
 {
+    m_pinfos = _infos;
+}
 
+ConfigFile::~ConfigFile()
+{
 }
 
 void
@@ -51,15 +56,15 @@ ConfigFile::processFile(rapidxml::xml_node<>* XMLRoot)
 void
 ConfigFile::processVideo(rapidxml::xml_node<>* XMLNode)
 {
-    LogManager::getSingleton()->logMessage( "[ConfigFile] Processing Video options." );
+    LogManager::getSingleton()->logMessage( "[ConfigFile] Processing video options." );
 
-    Config::getSingleton()->m_infos.fullscreen = XMLBool(XMLNode, "fullscreen");
-    Config::getSingleton()->m_infos.windowSize.x = XMLInt(XMLNode, "windowWidth");
-    Config::getSingleton()->m_infos.windowSize.y = XMLInt(XMLNode, "windowHeight");
-    Config::getSingleton()->m_infos.windowCentered = XMLBool(XMLNode, "windowCentered");
-    Config::getSingleton()->m_infos.windowResizable = XMLBool(XMLNode, "windowResizable");
-    Config::getSingleton()->m_infos.colorDepth = XMLInt(XMLNode, "colorDepth");
-    Config::getSingleton()->m_infos.vSync = XMLBool(XMLNode, "vSync");
+    m_pinfos->fullscreen = XMLBool(XMLNode, "fullscreen");
+    m_pinfos->windowSize.x = XMLInt(XMLNode, "windowWidth");
+    m_pinfos->windowSize.y = XMLInt(XMLNode, "windowHeight");
+    m_pinfos->windowCentered = XMLBool(XMLNode, "windowCentered");
+    m_pinfos->windowResizable = XMLBool(XMLNode, "windowResizable");
+    m_pinfos->colorDepth = XMLInt(XMLNode, "colorDepth");
+    m_pinfos->vSync = XMLBool(XMLNode, "vSync");
 
     LogManager::getSingleton()->logMessage( "[ConfigFile] Done with video options." );
 }
@@ -70,7 +75,7 @@ ConfigFile::processMisc(rapidxml::xml_node<>* XMLNode)
 {
     LogManager::getSingleton()->logMessage( "[ConfigFile] Processing misc. options." );
 
-    Config::getSingleton()->m_infos.vSync = XMLBool(XMLNode, "verbose");
+    m_pinfos->verbose = XMLBool(XMLNode, "verbose");
 
     LogManager::getSingleton()->logMessage( "[ConfigFile] Done with misc. options." );
 }

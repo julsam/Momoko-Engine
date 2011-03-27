@@ -11,18 +11,17 @@ class Config
 {
 public:
     Config(int argc, char **argv);
-    static Config* getSingleton();
+    ~Config();
     bool init();
     void setupDefaultValues();
 
-    static Config_Info getInfo();
+    static Config* getSingleton();
     static std::string getCaption();
-
-public:
-    Config_Info m_infos;
+    static Config_Info* getInfos();
 
 private:
     static Config* instance;
+    Config_Info* m_infos;
     ConfigFile mConfigFile;
     LaunchOpt mLaunchOpt;
 };
