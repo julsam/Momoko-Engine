@@ -17,11 +17,12 @@ public:
 
     static Config* getSingleton();
     static std::string getCaption();
-    static Config_Info* getInfos();
+    static Config_Info getInfos();
 
 private:
     static Config* instance;
-    Config_Info* m_infos;
+    Config_Info m_infos;
+    Config_Info* m_pinfos; // point to m_infos
     ConfigFile mConfigFile;
     LaunchOpt mLaunchOpt;
 };

@@ -36,7 +36,7 @@ Window::init()
     /* /!\ undesired behavior: when resized,
      * the window goes to the center of the screen
      */
-    if (Config::getInfos()->windowCentered)
+    if (Config::getInfos().windowCentered)
     {
         putenv((char*)"SDL_VIDEO_CENTERED=1");
         LogManager::getSingleton()->logMessage( "[Window] Set window centered" );
@@ -86,10 +86,10 @@ Window::setupVideoMode()
      * | SDL_FULLSCREEN | SDL_DOUBLEBUF | SDL_GL_DOUBLEBUFFER | SDL_OPENGL
      */
     int flags = SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER
-        | ( Config::getInfos()->windowResizable ? SDL_RESIZABLE : 0 )
+        | ( Config::getInfos().windowResizable ? SDL_RESIZABLE : 0 )
         | SDL_OPENGL | ( instance->m_fullscreen ? SDL_FULLSCREEN : 0 );
 
-    int bpp = Config::getInfos()->colorDepth;
+    int bpp = Config::getInfos().colorDepth;
 
     if ((instance->m_surface = SDL_SetVideoMode(instance->m_windowSize.x, 
                     instance->m_windowSize.y, bpp, flags)) == NULL)
@@ -112,7 +112,7 @@ Window::reshape(const int _w, const int _h)
 {
     // little tricks to disable centered mode
     // when resized.
-    if (Config::getInfos()->windowCentered)
+    if (Config::getInfos().windowCentered)
         putenv((char*)"SDL_VIDEO_CENTERED");
 
     LogManager::getSingleton()->logMessage("[Window] Window size changed "+ to_str(_w) +"x"+ to_str(_h));

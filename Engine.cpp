@@ -26,9 +26,9 @@ Engine::init()
     mConfig.init();
 
     mWindow = new Window(Config::getCaption(),
-                         Config::getInfos()->windowSize.x,
-                         Config::getInfos()->windowSize.y,
-                         Config::getInfos()->fullscreen);
+                         Config::getInfos().windowSize.x,
+                         Config::getInfos().windowSize.y,
+                         Config::getInfos().fullscreen);
 
     if(!mWindow->init())
         return false;

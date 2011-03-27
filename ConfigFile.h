@@ -19,7 +19,7 @@ private:
     void processMisc(rapidxml::xml_node<>* XMLNode);
 
 private:
-    Config_Info*  m_pinfos; // pointer to Config::m_infos
+    Config_Info*  m_pinfos; // pointer to Config::m_pinfos
 };
 
 #endif // _CONFIGFILE_H

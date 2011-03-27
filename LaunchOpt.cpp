@@ -13,10 +13,10 @@ LaunchOpt::LaunchOpt(int argc, char** argv)
 }
 
 void
-LaunchOpt::setOptions(Config_Info* _infos)
+LaunchOpt::setOptions(Config_Info& _infos)
 {
     m_progname      = m_argv[0];
-    _infos->progname = m_argv[0];
+    _infos.progname = m_argv[0];
     m_version_flag  = 0;
     int c;
 
@@ -48,21 +48,21 @@ LaunchOpt::setOptions(Config_Info* _infos)
                 break;
 
            case 'f':
-                _infos->fullscreen   = true;
-                _infos->windowSize.x = 1680;// TODO change this
-                _infos->windowSize.y = 1050;
+                _infos.fullscreen   = true;
+                _infos.windowSize.x = 1680;// TODO change this
+                _infos.windowSize.y = 1050;
                 break;
 
            case 's':
                 try {
-                    parseScreenSize(optarg, _infos->windowSize);
+                    parseScreenSize(optarg, _infos.windowSize);
                 } catch (const string &err) {
                     cerr << err << endl;
                 }
                 break;
 
            case 'v':
-                _infos->verbose = 1;
+                _infos.verbose = 1;
                 break;
 
            case 'V':
@@ -82,15 +82,15 @@ LaunchOpt::setOptions(Config_Info* _infos)
     if(m_version_flag)
         showVersion();
 
-    if(_infos->verbose)
+    if(_infos.verbose)
     {
-        if(_infos->fullscreen)
+        if(_infos.fullscreen)
             LogManager::getSingleton()->logMessage("[LaunchOpt] Set fullscreen.");
         else
             LogManager::getSingleton()->logMessage("[LaunchOpt] Set windowed mode.");
 
         LogManager::getSingleton()->logMessage("[LaunchOpt] Screen size = " 
-                +  to_str<Vector2>(_infos->windowSize));
+                +  to_str<Vector2>(_infos.windowSize));
     }
 
     LogManager::getSingleton()->logMessage( "[LaunchOpt] Setup is done." );

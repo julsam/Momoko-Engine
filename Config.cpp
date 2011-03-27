@@ -7,8 +7,8 @@ using namespace std;
 Config* Config::instance = NULL;
 
 Config::Config(int argc, char **argv)
-    : m_infos(new Config_Info()),
-      mConfigFile(m_infos),
+    : m_pinfos(&m_infos),
+      mConfigFile(m_pinfos),
       mLaunchOpt(argc, argv)
 {
     instance = this;
@@ -17,7 +17,6 @@ Config::Config(int argc, char **argv)
 
 Config::~Config()
 {
-    delete m_infos;
 }
 
 Config*
@@ -40,19 +39,19 @@ void
 Config::setupDefaultValues()
 {
     // Video
-    instance->m_infos->fullscreen        = false;
-    instance->m_infos->windowSize        = Vector2(640, 480);
-    instance->m_infos->windowPosition    = Vector2();
-    instance->m_infos->windowCentered    = true;
-    instance->m_infos->windowResizable   = true;
-    instance->m_infos->colorDepth        = 32;
-    instance->m_infos->vSync             = false;
+    instance->m_infos.fullscreen        = false;
+    instance->m_infos.windowSize        = Vector2(640, 480);
+    instance->m_infos.windowPosition    = Vector2();
+    instance->m_infos.windowCentered    = true;
+    instance->m_infos.windowResizable   = true;
+    instance->m_infos.colorDepth        = 32;
+    instance->m_infos.vSync             = false;
     // misc
-    instance->m_infos->verbose           = true;
+    instance->m_infos.verbose           = true;
 }
 
 
-Config_Info*
+Config_Info
 Config::getInfos()
 {
     return instance->m_infos;
@@ -62,7 +61,7 @@ Config::getInfos()
 std::string
 Config::getCaption()
 {
-    return instance->m_infos->progname;
+    return instance->m_infos.progname;
 }
 
 
