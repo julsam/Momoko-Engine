@@ -29,7 +29,6 @@ ConfigFile::loadConfig(const string& _filename)
     if (!defaultFileExists())
     {
         createDefaultFile();
-        return;
     }
     else
     {

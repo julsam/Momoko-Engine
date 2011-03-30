@@ -4,7 +4,7 @@
 #include "AbstractXml.h"
 #include "Tools.h"
 
-class ConfigFile : public AbstractXml
+class ConfigFile : private AbstractXml
 {
 public:
     ConfigFile(Config_Info *_infos);

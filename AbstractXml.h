@@ -10,13 +10,15 @@ public:
     AbstractXml();
     AbstractXml(const std::string& _filename);
     ~AbstractXml();
-    virtual void processFile(rapidxml::xml_node<>* XMLRoot) = 0;
-    virtual bool createDefaultFile() = 0;
-    virtual void loadConfig(const std::string& _filename="") = 0;
+
     bool defaultFileExists();
     bool fileExists(const std::string& _filename);
     void readFile(const std::string& _filename);
     void setRootNode(const std::string& _nodeName);
+
+    virtual void processFile(rapidxml::xml_node<>* XMLRoot) = 0;
+    virtual bool createDefaultFile() = 0;
+    virtual void loadConfig(const std::string& _filename="") = 0;
 
 protected:
     void parse(const std::string& _input_xml);
