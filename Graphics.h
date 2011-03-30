@@ -20,6 +20,10 @@ public:
 public:
     Graphics();
     void init();
+    void initDevIL();
+    void initGL();
+
+    static void resize(float _w, float _h);
     void beginFrame();
     void endFrame();
     void glEnable2D();

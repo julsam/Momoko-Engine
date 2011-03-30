@@ -1,5 +1,6 @@
 #include "Event.h"
 #include "LogManager.h"
+#include "Graphics.h"
 
 using namespace std;
 
@@ -104,7 +105,9 @@ void
 Event::OnResize(int _w, int _h)
 {
     LogManager::getSingleton()->logMessage("[Event] Resize signal sent.");
+    LogManager::getSingleton()->logMessage("Window & Viewport will be resized.");
     Window::reshape(_w, _h);
+    Graphics::resize((float)_w, (float)_h);
 }
 
 // window close call

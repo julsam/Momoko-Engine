@@ -104,7 +104,7 @@ Window::setupVideoMode()
 }
 
 /*
- * /!\ In Windows, setting the video mode
+ * /!\ In MS Windows, setting the video mode
  *     resets the current OpenGL context
  */
 bool

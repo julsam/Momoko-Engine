@@ -3,3 +3,4 @@
 * write windowPos to config file when shuting down the app
 * write ConfigFile::createDefaultFile
 * handling exceptions
+* handle the "keeping pressed" input case
