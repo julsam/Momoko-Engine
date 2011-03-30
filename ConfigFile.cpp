@@ -26,12 +26,19 @@ ConfigFile::~ConfigFile()
 void
 ConfigFile::loadConfig(const string& _filename)
 {
-    checkFile();
-    setRootNode("config");
-    if (_filename == "")
-        readFile("config.xml");
+    if (!defaultFileExists())
+    {
+        createDefaultFile();
+        return;
+    }
     else
-        readFile(_filename);
+    {
+        setRootNode("config");
+        if (_filename == "")
+            readFile("config.xml");
+        else
+            readFile(_filename);
+    }
 }
 
 void

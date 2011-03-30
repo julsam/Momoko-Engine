@@ -27,27 +27,27 @@ AbstractXml::setRootNode(const std::string& _nodeName)
     m_rootNode = _nodeName;
 }
 
-void
-AbstractXml::checkFile()
+bool
+AbstractXml::defaultFileExists()
 {
     if(!Utils::fileExists(m_filename.c_str()))
     {
         LogManager::getSingleton()->logMessage("Couldn't load file '"+ m_filename +"' : the file doesn't exist !");
-        // create a config file
-        createDefaultFile();
+        return false;
     }
+    return true;
 }
 
-void
-AbstractXml::checkFile(const string& _filename)
+bool
+AbstractXml::fileExists(const string& _filename)
 {
     if(!Utils::fileExists(_filename.c_str()))
     {
         LogManager::getSingleton()->logMessage("Couldn't load file '"+ _filename +"' : the file doesn't exist !");
         LogManager::getSingleton()->logMessage("Will try to load default file instead.");
-        // load default file instead
-        checkFile();
+        return false;
     }
+    return true;
 }
 
 void

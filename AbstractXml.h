@@ -13,8 +13,8 @@ public:
     virtual void processFile(rapidxml::xml_node<>* XMLRoot) = 0;
     virtual bool createDefaultFile() = 0;
     virtual void loadConfig(const std::string& _filename="") = 0;
-    void checkFile();
-    void checkFile(const std::string& _filename);
+    bool defaultFileExists();
+    bool fileExists(const std::string& _filename);
     void readFile(const std::string& _filename);
     void setRootNode(const std::string& _nodeName);
 
