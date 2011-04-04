@@ -1,31 +1,35 @@
 .SUFFIXES:
 
-SRC = main.cpp\
-	  Engine.cpp\
-	  Config.cpp\
-	  Window.cpp\
-	  Event.cpp\
-	  Input.cpp\
-	  Vector2.cpp\
-	  Graphics.cpp\
-	  LogManager.cpp\
-	  Utils.cpp\
-	  Tools.cpp\
-	  AbstractXml.cpp\
-	  ConfigFile.cpp\
-	  LaunchOpt.cpp\
-	  Asset.cpp\
-	  Texture.cpp\
-	  ResourceManager.cpp\
-	  TextureManager.cpp\
-	  Sprite.cpp\
-	  Scene.cpp\
-	  tests/simple/Simple.cpp
+OBJDIR = obj/
+BIN = bin
+
+SRC = src/main.cpp\
+	  src/Engine.cpp\
+	  src/Config.cpp\
+	  src/Config.cpp\
+	  src/Window.cpp\
+	  src/Event.cpp\
+	  src/Input.cpp\
+	  src/Vector2.cpp\
+	  src/Graphics.cpp\
+	  src/LogManager.cpp\
+	  src/Utils.cpp\
+	  src/Tools.cpp\
+	  src/AbstractXml.cpp\
+	  src/ConfigFile.cpp\
+	  src/LaunchOpt.cpp\
+	  src/Asset.cpp\
+	  src/Texture.cpp\
+	  src/ResourceManager.cpp\
+	  src/TextureManager.cpp\
+	  src/Sprite.cpp\
+	  src/Scene.cpp\
+	  src/tests/simple/Simple.cpp
 
 OBJECTS = $(SRC:.cpp=.o)
 
 CXX = g++
-TARGET = bin
+TARGET = $(OBJDIR)$(BIN)
 CXXFLAGS += -W -Wall -g `sdl-config --cflags` -I./
 LDFLAGS += -lGL -lGLU -lILUT `sdl-config --libs` #-lSDL_image
 
@@ -40,7 +44,7 @@ $(TARGET): $(OBJECTS)
 .PHONY: clean, mrproper
 
 clean:
-	rm -f *.o
+	rm -f src/*.o
 
 mrproper : clean
 	rm -f $(TARGET)
