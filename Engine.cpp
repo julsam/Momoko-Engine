@@ -5,60 +5,99 @@ using namespace std;
 Engine* Engine::instance = NULL;
 
 Engine::Engine(int argc, char **argv)
-    : mConfig(argc, argv),
-      m_quit(false),
-      deltaTime(0.0f),
-      thisTime(0),
-      lastTime(0)
+	: mConfig(argc, argv),
+	  mScene(NULL),
+	  mSwitchTo(NULL),
+	  m_quit(false),
+	  deltaTime(0.0f),
+	  thisTime(0),
+	  lastTime(0)
 {
-    instance = this;
+	instance = this;
 }
 
 Engine::~Engine()
 {
-    delete mWindow;
+	delete mWindow;
 }
 
 bool
 Engine::init()
 {
-    mLogManager.init(); // first thing to init
-    mConfig.init();
+	mLogManager.init(); // first thing to init
+	mConfig.init();
 
-    mWindow = new Window(Config::getCaption(),
-                         Config::getInfos().windowSize.x,
-                         Config::getInfos().windowSize.y,
-                         Config::getInfos().fullscreen);
+	mWindow = new Window(Config::getCaption(),
+						 Config::getInfos().windowSize.x,
+						 Config::getInfos().windowSize.y,
+						 Config::getInfos().fullscreen);
 
-    if(!mWindow->init())
-        return false;
-    mEvent.init();
-    mGraphics.init();
+	if(!mWindow->init())
+		return false;
+	mEvent.init();
+	mGraphics.init();
 
-    return true;
+	return true;
 }
 
 int
 Engine::execute()
 {
-    while(!mEvent.isExitPressed() && !m_quit)
-    {
-        thisTime = SDL_GetTicks();
-        deltaTime = (double)(thisTime - lastTime) / 1000.0;
-        lastTime = thisTime;
+	while(!mEvent.isExitPressed() && !m_quit)
+	{
+		thisTime = SDL_GetTicks();
+		deltaTime = (double)(thisTime - lastTime) / 1000.0;
+		lastTime = thisTime;
 
-        mEvent.update();
+		if (mSwitchTo != NULL)
+		{
+			if (mScene != NULL)
+			{
+				mScene->end();
+			}
+			
+			mScene = mSwitchTo;
+			mSwitchTo = NULL;
+			LogManager::getSingleton()->logMessage( "Scene changed." );
+			
+			if (mScene != NULL)
+			{
+				mScene->begin();
+			}
+		}
+		
+		mEvent.update();
+		if (mScene != NULL)
+			mScene->update();
+		
+		
+		if(Event::isKeyPressed(SDLK_ESCAPE))
+			m_quit = true;
+		if(Event::isKeyPressed(SDLK_f))
+			Window::changeFullscreen();
 
-        if(Event::isKeyPressed(SDLK_ESCAPE))
-            m_quit = true;
-        if(Event::isKeyPressed(SDLK_f))
-            Window::changeFullscreen();
 
-        mGraphics.beginFrame();
-        mGraphics.endFrame();
-        SDL_Delay(33);
-    }
-    return 0;
+
+		mGraphics.beginFrame();
+		
+		if (mScene != NULL)
+			mScene->render();
+		
+		mGraphics.endFrame();
+
+		SDL_Delay(33);
+	}
+	return 0;
 }
 
+void
+Engine::setScene(Scene* scene)
+{
+	instance->mSwitchTo = scene;	
+}
 
+Scene*
+Engine::getScene()
+{
+	return instance->mScene;
+}

@@ -4,3 +4,5 @@
 * write ConfigFile::createDefaultFile
 * handling exceptions
 * handle the "keeping pressed" input case
+* isButtonPressed(), isKeyPressed()
+* defineMaskKey("jump", SDLK_x, SDLK_c)

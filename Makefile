@@ -14,13 +14,20 @@ SRC = main.cpp\
 	  AbstractXml.cpp\
 	  ConfigFile.cpp\
 	  LaunchOpt.cpp\
+	  Asset.cpp\
+	  Texture.cpp\
+	  ResourceManager.cpp\
+	  TextureManager.cpp\
+	  Sprite.cpp\
+	  Scene.cpp\
+	  tests/simple/Simple.cpp
 
 OBJECTS = $(SRC:.cpp=.o)
 
 CXX = g++
 TARGET = bin
 CXXFLAGS += -W -Wall -g `sdl-config --cflags` -I./
-LDFLAGS += -lGL -lGLU -lILUT `sdl-config --libs` -lSDL_image #sdl_image maybe useless, we'll see
+LDFLAGS += -lGL -lGLU -lILUT `sdl-config --libs` #-lSDL_image
 
 all:$(TARGET)
 

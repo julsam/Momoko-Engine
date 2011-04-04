@@ -44,7 +44,6 @@ AbstractXml::fileExists(const string& _filename)
     if(!Utils::fileExists(_filename.c_str()))
     {
         LogManager::getSingleton()->logMessage("Couldn't load file '"+ _filename +"' : the file doesn't exist !");
-        LogManager::getSingleton()->logMessage("Will try to load default file instead.");
         return false;
     }
     return true;

@@ -28,6 +28,7 @@ ConfigFile::loadConfig(const string& _filename)
 {
     if (!defaultFileExists())
     {
+        LogManager::getSingleton()->logMessage("Creating a new config file. (not yet implemented)");
         createDefaultFile();
     }
     else
@@ -91,7 +92,6 @@ ConfigFile::processMisc(rapidxml::xml_node<>* XMLNode)
 bool
 ConfigFile::createDefaultFile()
 {
-    LogManager::getSingleton()->logMessage("Creating a new config file. (not yet implemented)");
     
     //LogManager::getSingleton()->logMessage("[ConfigFile] Error: Could not create a new config file.", LogManager::LML_CRITICAL);
     return true;
