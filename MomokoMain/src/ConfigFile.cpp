@@ -1,8 +1,8 @@
-#include "ConfigFile.h"
-#include "Config.h"
-#include "LogManager.h"
-#include "Vector2.h"
-#include "Utils.h"
+#include "../include/ConfigFile.h"
+#include "../include/Config.h"
+#include "../include/LogManager.h"
+#include "../include/Vector2.h"
+#include "../include/Utils.h"
 #include <vector>
 
 using namespace std;

@@ -1,6 +1,6 @@
-#include "Window.h"
-#include "LogManager.h"
-#include "Config.h"
+#include "../include/Window.h"
+#include "../include/LogManager.h"
+#include "../include/Config.h"
 
 using namespace std;
 

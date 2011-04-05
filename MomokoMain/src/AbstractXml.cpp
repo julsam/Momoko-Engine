@@ -1,7 +1,7 @@
-#include "AbstractXml.h"
-#include "LogManager.h"
-#include "Vector2.h"
-#include "Utils.h"
+#include "../include/AbstractXml.h"
+#include "../include/LogManager.h"
+#include "../include/Vector2.h"
+#include "../include/Utils.h"
 #include <vector>
 #include <fstream>
 

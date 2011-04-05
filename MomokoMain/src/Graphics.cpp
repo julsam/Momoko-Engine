@@ -1,6 +1,6 @@
-#include "Graphics.h"
-#include "Window.h"
-#include "LogManager.h"
+#include "../include/Graphics.h"
+#include "../include/Window.h"
+#include "../include/LogManager.h"
 
 #include <IL/ilut.h>
 

@@ -1,6 +1,6 @@
-#include "Event.h"
-#include "LogManager.h"
-#include "Graphics.h"
+#include "../include/Event.h"
+#include "../include/LogManager.h"
+#include "../include/Graphics.h"
 
 using namespace std;
 

@@ -1,11 +1,4 @@
-#include "Engine.h"
-
-#define TESTSIMPLE
-//#define ENGINEMODE
-
-#ifdef TESTSIMPLE
-	#include "tests/simple/Simple.h"
-#endif
+#include "Basic.h"
 
 int
 main(int argc, char **argv)
@@ -15,10 +8,7 @@ main(int argc, char **argv)
     {
         if(!e.init())
             return 1;
-		
-#ifdef TESTSIMPLE
-		e.setScene(new Simple::GameScene());
-#endif
+        e.setScene(new Basic::GameScene());
         e.execute();
 
     }

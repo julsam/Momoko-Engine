@@ -1,7 +1,7 @@
-#include "LogManager.h"
-#include "Config.h"
-#include "Utils.h"
-#include "Tools.h"
+#include "../include/LogManager.h"
+#include "../include/Config.h"
+#include "../include/Utils.h"
+#include "../include/Tools.h"
 
 using namespace std;
 

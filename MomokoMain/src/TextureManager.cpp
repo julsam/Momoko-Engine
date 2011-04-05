@@ -1,6 +1,6 @@
-#include "TextureManager.h"
-#include "Exception.h"
-#include "LogManager.h"
+#include "../include/TextureManager.h"
+#include "../include/Exception.h"
+#include "../include/LogManager.h"
 #include <iostream>
 
 using namespace std;

@@ -1,7 +1,7 @@
-#include "Texture.h"
-#include "Exception.h"
+#include "../include/Texture.h"
+#include "../include/Exception.h"
+#include "../include/LogManager.h"
 #include <IL/il.h>
-#include "LogManager.h"
 
 using namespace std;
 

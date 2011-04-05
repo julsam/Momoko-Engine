@@ -1,6 +1,6 @@
-#include "LaunchOpt.h"
-#include "Tools.h"
-#include "LogManager.h"
+#include "../include/LaunchOpt.h"
+#include "../include/Tools.h"
+#include "../include/LogManager.h"
 #include <stdlib.h>
 #include <getopt.h> // GNU only
 

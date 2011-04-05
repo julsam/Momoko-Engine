@@ -1,6 +1,6 @@
-#include "Asset.h"
-#include "TextureManager.h"
-#include "LogManager.h"
+#include "../include/Asset.h"
+#include "../include/TextureManager.h"
+#include "../include/LogManager.h"
 
 using namespace std;
 

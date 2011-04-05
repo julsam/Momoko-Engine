@@ -1,7 +1,7 @@
-#include "Sprite.h"
-#include "Exception.h"
-#include "TextureManager.h"
-#include "LogManager.h"
+#include "../include/Sprite.h"
+#include "../include/Exception.h"
+#include "../include/TextureManager.h"
+#include "../include/LogManager.h"
 
 using namespace std;
 
