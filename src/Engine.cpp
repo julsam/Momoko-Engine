@@ -19,6 +19,10 @@ Engine::Engine(int argc, char **argv)
 Engine::~Engine()
 {
 	delete mWindow;
+	if (mScene != NULL)
+		delete mScene;
+	if (mSwitchTo != NULL)
+		delete mSwitchTo;
 }
 
 bool
@@ -54,11 +58,12 @@ Engine::execute()
 			if (mScene != NULL)
 			{
 				mScene->end();
+				delete mScene;
 			}
 			
 			mScene = mSwitchTo;
 			mSwitchTo = NULL;
-			LogManager::getSingleton()->logMessage( "Scene changed." );
+			LogManager::getSingleton()->logMessage( "New Scene loaded." );
 			
 			if (mScene != NULL)
 			{
