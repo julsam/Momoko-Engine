@@ -9,10 +9,10 @@ namespace Basic
 	class GameScene : public Scene
 	{
 	public:
-		void begin();
-		void end();
-		void update();
-		void render();
+		virtual void begin();
+		virtual void end();
+		virtual void update();
+		virtual void render();
 		
 	private:
 	};

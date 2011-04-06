@@ -5,13 +5,13 @@ class Scene
 {
 public:
 	Scene();
-	~Scene();
-	
-	virtual void update();
-	virtual void render(); // temp virtual
+	virtual ~Scene(); 
 	
 	virtual void begin();
 	virtual void end();
+	
+	virtual void update();
+	virtual void render(); // temp virtual
 };
 
 #endif // _SCENE_H

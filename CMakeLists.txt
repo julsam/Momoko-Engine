@@ -58,6 +58,6 @@ include_directories(${OPENGL_INCLUDE_DIR})
 set(DEVIL_LINK ${IL_LIBRARIES} ${ILU_LIBRARIES} ${ILUT_LIBRARIES})
 
 
+add_subdirectory(libs/Box2D)
 add_subdirectory(MomokoMain)
 add_subdirectory(tests)
-
