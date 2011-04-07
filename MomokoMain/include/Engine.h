@@ -21,6 +21,7 @@ public:
 	
 	static void setScene(Scene* scene);
 	static Scene* getScene();
+	static double getDeltaTime();
 
 private:
 	static Engine* instance;

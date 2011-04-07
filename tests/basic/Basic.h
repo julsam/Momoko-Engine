@@ -3,7 +3,6 @@
 
 #include "../../MomokoMain/include/Engine.h"
 
-
 namespace Basic
 {
 	class GameScene : public Scene

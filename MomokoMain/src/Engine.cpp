@@ -106,3 +106,9 @@ Engine::getScene()
 {
 	return instance->mScene;
 }
+
+double
+Engine::getDeltaTime()
+{
+	return instance->deltaTime;
+}
