@@ -3,6 +3,7 @@
 
 #include "../../MomokoMain/include/Engine.h"
 #include "../../MomokoMain/include/Entity.h"
+#include "../../MomokoMain/include/Colour.h"
 #include "../../libs/Box2D/Box2D.h"
 #include <cstdio>
 #include <vector>
@@ -25,7 +26,7 @@ namespace helloBox2d
 		void addACrate(b2Vec2 pos, b2Vec2 size, int angle);
 		void addARandomCrate();
 		
-		void drawRect(b2Vec2 pos, b2Vec2 size, float angle);
+		void drawRect(b2Vec2 pos, b2Vec2 size, float angle, Colour color=Colour::White);
 		
 		int randomInt(int lowVal, int highVal);
 		

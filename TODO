@@ -6,3 +6,6 @@
 * handle the "keeping pressed" input case
 * isButtonPressed(), isKeyPressed()
 * defineMaskKey("jump", SDLK_x, SDLK_c)
+* Color class
+* Maybe should I make a PhysicObject class, separated from Entity ?
+* later: define some physics material like crate, stone, etc

@@ -10,6 +10,8 @@ using namespace std;
 namespace helloBox2d
 {
 	const float GameScene::RATIO = 30.0f;
+	Colour b2GreenColor = Colour(0.49803921568627452, 0.89803921568627454, 0.4980392156862745);
+	Colour b2RedColor = Colour(0.89803921568627454, 0.59999999999999998, 0.59999999999999998);
 	
 	void
 	GameScene::begin()
@@ -51,7 +53,7 @@ namespace helloBox2d
 		if (m_nextCrateIn <= 0 && m_world->GetBodyCount() < 80)
 		{
 			addARandomCrate();
-			m_nextCrateIn = 30;
+			m_nextCrateIn = 10;
 		}
 
 		//b2Vec2 position = m_crate->GetPosition();
@@ -70,33 +72,33 @@ namespace helloBox2d
 			b2Vec2 size = b2Vec2(m_crates[i]->width, m_crates[i]->height);
 			float angle = m_crates[i]->m_body->GetAngle() * (180 / b2_pi);
 			
-			drawRect(pos, size, angle);
+			drawRect(pos, size, angle, b2RedColor);
 		}
 		
 		b2Vec2 pos = m_groundBody->GetPosition();
 		b2Vec2 size = b2Vec2(300.0f, 10.0f);
 		float angle = m_groundBody->GetAngle() * (180 / b2_pi);
 		
-		drawRect(pos, size, angle);
+		drawRect(pos, size, angle, b2GreenColor);
 		
 		// Left
 		pos = m_leftWallBody->GetPosition();
 		size = b2Vec2(5.0f, 195.0f);
 		angle = m_leftWallBody->GetAngle() * (180 / b2_pi);
 		
-		drawRect(pos, size, angle);
+		drawRect(pos, size, angle, b2GreenColor);
 		
 		// Right
 		pos = m_rightWallBody->GetPosition();
 		size = b2Vec2(5.0f, 195.0f);
 		angle = m_rightWallBody->GetAngle() * (180 / b2_pi);
 		
-		drawRect(pos, size, angle);
+		drawRect(pos, size, angle, b2GreenColor);
 	}
 	
 	
 	void
-	GameScene::drawRect(b2Vec2 pos, b2Vec2 size, float angle)
+	GameScene::drawRect(b2Vec2 pos, b2Vec2 size, float angle, Colour color)
 	{
 		glPushMatrix();
 	
@@ -104,7 +106,18 @@ namespace helloBox2d
 		glRotatef(angle, 0, 0, 1);
 		
 		glBegin(GL_LINE_LOOP);
-			glColor3f(1, 1, 1); 
+			glColor3f(color.r, color.g, color.b); 
+			glVertex3i(-size.x, -size.y, 0);
+			glVertex3i(size.x, -size.y, 0);
+			glVertex3i(size.x, size.y, 0);
+			glVertex3i(-size.x, size.y, 0);
+		glEnd();
+		
+		glEnable (GL_BLEND);
+		glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		
+		glBegin(GL_QUADS);
+			glColor4f(color.r, color.g, color.b, 0.1); 
 			glVertex3i(-size.x, -size.y, 0);
 			glVertex3i(size.x, -size.y, 0);
 			glVertex3i(size.x, size.y, 0);
